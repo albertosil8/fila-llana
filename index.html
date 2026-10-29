@@ -1,0 +1,690 @@
+<!doctype html>
+<html lang="ca-ES-valencia">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Filà Llana · Muro d'Alcoi</title>
+<meta name="description" content="Web de la Filà Llana, Moros i Cristians de Muro d'Alcoi: calendari d'actes, fotos i inscripcions.">
+<meta name="theme-color" content="#D12116">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Filà Llana">
+<meta property="og:description" content="Calendari d'actes, fotos i inscripcions de la Filà Llana de Muro d'Alcoi.">
+<meta property="og:image" content="https://albertosil8.github.io/fila-llana/img/compartir.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders:wght@700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap">
+<style>
+:root{
+  --red:#D12116;        /* el camp de l'escut */
+  --red-deep:#A3170E;
+  --gold:#F5B323;       /* els pardalets */
+  --black:#000;
+  --paper:#FFFFFF;
+  --tint:#FCEFEC;
+  --ink:#1D1D1D;
+  --muted:#5E5654;
+  --line:#E6D9D6;
+  --display:"Big Shoulders","Arial Narrow",Impact,sans-serif;
+  --body:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --wrap:1120px;
+  --gutter:20px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.6}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--black);outline-offset:3px}
+.on-dark :focus-visible,.hero :focus-visible,.contact :focus-visible{outline-color:var(--gold)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 max(var(--gutter),env(safe-area-inset-left)) 0 max(var(--gutter),env(safe-area-inset-right))}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.skip{position:absolute;left:12px;top:-60px;background:var(--black);color:#fff;padding:10px 14px;z-index:50;text-decoration:none}
+.skip:focus{top:12px}
+
+/* ── Capçalera ── */
+.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.top .wrap{display:flex;align-items:center;gap:16px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto}
+.brand img{height:40px;width:auto}
+.brand span{font-family:var(--display);font-weight:800;font-size:1.6rem;letter-spacing:.01em;line-height:1}
+.nav{display:flex;gap:4px}
+.nav a{text-decoration:none;font-weight:700;padding:8px 12px;border-radius:6px}
+.nav a:hover{background:var(--tint)}
+.lang{display:flex;border:2px solid var(--black);border-radius:999px;overflow:hidden;flex:none}
+.lang button{border:0;background:transparent;padding:5px 11px;font-weight:700;font-size:.875rem;cursor:pointer;min-width:42px}
+.lang button[aria-pressed="true"]{background:var(--black);color:#fff}
+.menu-btn{display:none;border:0;background:transparent;padding:8px;cursor:pointer;flex:none}
+@media (max-width:860px){
+  .menu-btn{display:block}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;background:var(--paper);border-bottom:1px solid var(--line);padding:8px var(--gutter) 16px}
+  .nav.open{display:flex}
+  .nav a{padding:12px 8px;font-size:1.125rem}
+}
+
+/* ── Portada ── */
+.hero{background:var(--red);color:var(--black);overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);align-items:center;gap:40px;padding-top:56px;padding-bottom:64px}
+.hero-shield{justify-self:center;height:min(66vh,540px);width:auto;max-width:100%}
+.hero h1{margin:0}
+.hero h1 img{width:min(100%,520px);height:auto}
+.hero .tagline{font-family:var(--display);font-weight:800;font-size:clamp(1.5rem,3.2vw,2.1rem);line-height:1.1;margin:18px 0 32px;letter-spacing:.01em}
+.next{background:var(--black);color:#fff;border-radius:14px;padding:20px 22px;max-width:460px;display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:center}
+.next .lbl{grid-column:1/-1;color:var(--gold);font-weight:700;font-size:.9375rem;margin-bottom:6px}
+.next .day{font-family:var(--display);font-weight:900;font-size:3.4rem;line-height:.85;text-align:center}
+.next .day small{display:block;font-size:1.05rem;font-weight:800;letter-spacing:.04em;margin-top:6px}
+.next .what{font-weight:700;font-size:1.15rem;line-height:1.3}
+.next .when{color:#D8D2D0;font-size:.9375rem;display:block;font-weight:400;margin-top:2px}
+.next .go{grid-column:1/-1;margin-top:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 20px;border-radius:10px;border:2px solid transparent;font-weight:700;text-decoration:none;cursor:pointer;line-height:1.2}
+.btn svg{flex:none}
+.btn-gold{background:var(--gold);color:var(--black)}
+.btn-gold:hover{background:#FFC548}
+.btn-red{background:var(--red);color:#fff}
+.btn-red:hover{background:var(--red-deep)}
+.btn-line{background:transparent;border-color:currentColor}
+.btn-line:hover{background:var(--tint)}
+.btn-black{background:var(--black);color:#fff}
+@media (max-width:760px){
+  .hero .wrap{grid-template-columns:1fr;gap:20px;padding-top:28px;padding-bottom:40px;text-align:center}
+  .hero-shield{height:min(40vh,300px)}
+  .hero h1 img{margin:0 auto;width:min(86vw,420px)}
+  .hero .tagline{margin:14px 0 24px}
+  .next{margin:0 auto;text-align:left}
+}
+
+/* ── Seccions ── */
+section.block{padding:72px 0}
+@media (max-width:760px){section.block{padding:52px 0}}
+.block h2{font-family:var(--display);font-weight:900;font-size:clamp(2.5rem,6vw,4rem);line-height:.95;margin:0 0 14px;letter-spacing:.005em}
+.lead{font-size:1.1875rem;max-width:62ch;margin:0 0 28px;color:var(--muted)}
+.tinted{background:var(--tint)}
+.demo{display:flex;gap:10px;align-items:flex-start;background:#FFF4D6;border:1px solid #F0D58C;border-radius:10px;padding:12px 14px;font-size:.9375rem;line-height:1.45;max-width:720px;margin:0 0 28px;color:#4A3A10}
+.demo svg{flex:none;margin-top:1px}
+
+/* La filà */
+.about{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:start}
+.about p{margin:0 0 16px;max-width:60ch}
+.jump{display:flex;flex-direction:column;gap:10px;border-left:6px solid var(--red);padding-left:22px}
+.jump a{display:flex;justify-content:space-between;align-items:center;gap:14px;text-decoration:none;font-weight:700;font-size:1.125rem;padding:12px 0;border-bottom:1px solid var(--line)}
+.jump .jt{display:block}
+.jump .js{display:block;font-weight:400;color:var(--muted);font-size:.9375rem}
+.jump a::after{content:"";width:10px;height:10px;border-right:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg);flex:none;margin-right:4px}
+.jump a:hover{color:var(--red)}
+@media (max-width:760px){.about{grid-template-columns:1fr;gap:28px}}
+
+/* Calendari */
+.cal-tools{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 32px}
+.month{font-family:var(--display);font-weight:800;font-size:1.6rem;margin:32px 0 10px;color:var(--red)}
+.month:first-of-type{margin-top:0}
+.events{list-style:none;margin:0;padding:0;border-top:2px solid var(--black)}
+.ev{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:18px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.ev-date{text-align:center;line-height:1}
+.ev-date b{display:block;font-family:var(--display);font-weight:900;font-size:2.6rem}
+.ev-date b.range{font-size:1.55rem;line-height:1.05}
+.ev-date span{display:block;font-weight:700;font-size:.8125rem;color:var(--muted);margin-top:4px;text-transform:capitalize}
+.ev h3{margin:0;font-size:1.1875rem;line-height:1.3}
+.ev p{margin:2px 0 0;color:var(--muted);font-size:.9688rem}
+.ev .btn{min-height:42px;padding:8px 14px;font-size:.9375rem}
+.ev.past{opacity:.5}
+@media (max-width:560px){
+  .ev{grid-template-columns:58px minmax(0,1fr);gap:4px 14px}
+  .ev .btn{grid-column:2;justify-self:start;margin-top:8px}
+  .ev-date b{font-size:2.2rem}
+}
+
+/* Galeria */
+.on-dark{background:var(--black);color:#fff}
+.on-dark .lead{color:#C9C2C0}
+.on-dark .demo{background:#2A2210;border-color:#5C4A1C;color:#F4E3B5}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.grid button{border:0;padding:0;background:#222;cursor:zoom-in;border-radius:6px;overflow:hidden;aspect-ratio:4/3}
+.grid button:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
+.grid img{width:100%;height:100%;object-fit:cover;transition:transform .4s ease}
+.grid button:hover img{transform:scale(1.04)}
+@media (max-width:640px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid button:first-child{grid-column:auto;grid-row:auto;aspect-ratio:4/3}}
+dialog.lightbox{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100vw;height:100dvh;margin:0}
+dialog.lightbox::backdrop{background:rgba(0,0,0,.92)}
+.lb-inner{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:56px 12px}
+.lb-inner img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px}
+.lb-btn{position:absolute;border:0;background:rgba(255,255,255,.12);color:#fff;width:48px;height:48px;border-radius:50%;cursor:pointer;display:grid;place-items:center}
+.lb-btn:hover{background:rgba(255,255,255,.24)}
+.lb-close{top:max(12px,env(safe-area-inset-top));right:12px}
+.lb-prev{left:12px;top:50%;transform:translateY(-50%)}
+.lb-next{right:12px;top:50%;transform:translateY(-50%)}
+.lb-count{position:absolute;bottom:max(16px,env(safe-area-inset-bottom));left:0;right:0;text-align:center;color:#ddd;font-size:.9375rem}
+
+/* Formulari */
+.form-wrap{max-width:720px}
+.fcard{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.fhead{background:var(--red);color:#fff;padding:18px 24px}
+.fhead h3{margin:0;font-family:var(--display);font-weight:800;font-size:1.9rem;line-height:1.05}
+.fhead p{margin:6px 0 0;font-size:1rem;line-height:1.45;color:#FFE9E5}
+.fbody{padding:8px 24px 24px}
+.q{padding:20px 0;border-bottom:1px solid var(--line)}
+.q:last-child{border-bottom:0}
+.q-label{display:block;font-weight:700;font-size:1.0625rem;margin:0 0 4px}
+.q-label .star{color:var(--red);margin-left:4px}
+.q-help{margin:0 0 10px;color:var(--muted);font-size:.9375rem;line-height:1.45}
+.ph{background:#FFF4D6;border:1px dashed #C99A1C;border-radius:4px;padding:0 4px;color:#5A4410}
+.inp{width:100%;font:inherit;font-size:1.0625rem;padding:12px 14px;border:2px solid #CFC3C0;border-radius:10px;background:#fff;color:var(--ink)}
+.inp:focus{border-color:var(--black);outline:none;box-shadow:0 0 0 3px rgba(245,179,35,.6)}
+textarea.inp{min-height:120px;resize:vertical;line-height:1.5}
+select.inp{max-width:200px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border:2px solid #E3D6D3;border-radius:10px;cursor:pointer;line-height:1.4}
+.opt:hover{border-color:#BFAFAB}
+.opt input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--red);flex:none}
+.opt:has(input:checked){border-color:var(--red);background:var(--tint)}
+.file{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.file-btn{position:relative;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:2px solid var(--black);border-radius:10px;font-weight:700;cursor:pointer}
+.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%}
+.file-btn:focus-within{box-shadow:0 0 0 3px rgba(245,179,35,.7)}
+.file-prev{display:flex;align-items:center;gap:10px;font-size:.9375rem;color:var(--muted);min-width:0}
+.file-prev img{width:64px;height:44px;object-fit:cover;border-radius:6px;border:1px solid var(--line)}
+.file-prev span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:220px}
+.q-err{display:none;align-items:center;gap:6px;color:#B3140B;font-weight:700;font-size:.9375rem;margin-top:8px}
+.q.invalid .q-err{display:flex}
+.q.invalid .inp,.q.invalid .opt,.q.invalid .file-btn{border-color:#B3140B}
+.fnav{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:20px}
+.fnav .grow{margin-left:auto}
+.linkish{border:0;background:none;color:var(--red-deep);font-weight:700;cursor:pointer;padding:8px 4px;text-decoration:underline;text-underline-offset:3px}
+.steps{display:flex;gap:6px;margin:0 0 14px}
+.steps i{height:6px;flex:1;border-radius:3px;background:var(--line)}
+.steps i.on{background:var(--red)}
+.done-ok{display:flex;gap:14px;align-items:center;padding:20px 0 8px}
+.done-ok svg{flex:none;color:#1E7B34}
+.done-ok p{margin:0;font-weight:700;font-size:1.125rem}
+.sum{margin:18px 0 0;padding:16px 18px;border-radius:10px;background:var(--tint)}
+.sum h4{margin:0 0 10px;font-size:1rem}
+.sum dl{margin:0;display:grid;grid-template-columns:minmax(0,2fr) minmax(0,3fr);gap:6px 16px;font-size:.9375rem}
+.sum dt{color:var(--muted)}
+.sum dd{margin:0;font-weight:700;overflow-wrap:anywhere;white-space:pre-line}
+@media (max-width:560px){.fbody{padding:4px 18px 20px}.fhead{padding:16px 18px}.sum dl{grid-template-columns:1fr}.sum dd{margin-bottom:8px}}
+
+/* Contacte */
+.contact{background:var(--red);color:#fff}
+.contact h2{color:var(--black)}
+.contact-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:8px}
+.contact-grid div{border-top:3px solid var(--black);padding-top:14px}
+.contact-grid h3{margin:0 0 4px;font-size:1rem;color:var(--black)}
+.contact-grid p{margin:0;font-size:1.0625rem}
+.contact .ph{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.7);color:#fff}
+@media (max-width:760px){.contact-grid{grid-template-columns:1fr;gap:18px}}
+footer{background:var(--black);color:#BDB5B3;font-size:.9375rem;padding:28px 0 calc(28px + env(safe-area-inset-bottom))}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+footer img{height:30px;width:auto}
+footer .f-brand{display:flex;align-items:center;gap:12px}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Salta al contingut</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#inici"><img src="img/escudo-sm.png" alt="" width="30" height="40"><span>Filà Llana</span></a>
+    <nav class="nav" id="nav" aria-label="Menú">
+      <a href="#calendari" data-i18n="nav_cal">Calendari</a>
+      <a href="#galeria" data-i18n="nav_gal">Galeria</a>
+      <a href="#inscripcions" data-i18n="nav_form">Inscripcions</a>
+      <a href="#contacte" data-i18n="nav_contact">Contacte</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma">
+      <button type="button" data-lang="va" aria-pressed="true" lang="ca-ES-valencia">VA</button>
+      <button type="button" data-lang="es" aria-pressed="false" lang="es">ES</button>
+    </div>
+    <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav" data-i18n-aria="menu" aria-label="Menú">
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 6h18v2H3V6Zm0 5h18v2H3v-2Zm0 5h18v2H3v-2Z"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+<section class="hero" id="inici">
+  <div class="wrap">
+    <img class="hero-shield" src="img/escudo.png" alt="Escut de la Filà Llana" data-i18n-alt="shield_alt" width="561" height="760">
+    <div>
+      <h1><img src="img/lletres.png" alt="Filà Llana" width="795" height="153"></h1>
+      <p class="tagline" data-i18n="tagline">Moros i Cristians de Muro d'Alcoi</p>
+      <div class="next" id="next" hidden>
+        <span class="lbl" data-i18n="next_lbl">Pròxim acte</span>
+        <div class="day" id="next-day"></div>
+        <div class="what"><span id="next-title"></span><span class="when" id="next-when"></span></div>
+        <a class="btn btn-gold go" href="#calendari" data-i18n="next_btn">Veure tot el calendari</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="la-fila" aria-labelledby="h-fila">
+  <div class="wrap about">
+    <div>
+      <h2 id="h-fila" data-i18n="about_h">La filà</h2>
+      <p data-i18n="about_p1">La Filà Llana és una colla de festers i festeres de Muro que viu els Moros i Cristians tot l'any: els assajos, els sopars, l'entrada i tot el que porta la festa.</p>
+      <p data-i18n="about_p2">En aquesta web trobaràs el calendari d'actes, les fotos de la filà i els formularis per a donar-te d'alta, apuntar-te al boato o portar convidats.</p>
+    </div>
+    <div class="jump">
+      <a href="#inscripcions"><div><span class="jt" data-i18n="j1_t">Vull apuntar-me</span><span class="js" data-i18n="j1_s">Alta, boato, convidats o propostes</span></div></a>
+      <a href="#calendari"><div><span class="jt" data-i18n="j2_t">Quan són els actes?</span><span class="js" data-i18n="j2_s">Descarrega el calendari al mòbil</span></div></a>
+      <a href="#galeria"><div><span class="jt" data-i18n="j3_t">Veure les fotos</span><span class="js" data-i18n="j3_s">La filà en la festa</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="block tinted" id="calendari" aria-labelledby="h-cal">
+  <div class="wrap">
+    <h2 id="h-cal" data-i18n="cal_h">Calendari</h2>
+    <p class="lead" data-i18n="cal_lead">Tots els actes de la filà. Descarrega'ls i et sortiran al calendari del mòbil.</p>
+    <p class="demo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg><span data-i18n="cal_demo">Calendari de prova: les dates són d'exemple.</span></p>
+    <div class="cal-tools">
+      <button type="button" class="btn btn-red" id="dl-all">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 20h14v-2H5v2Zm7-2 6-6-1.41-1.41L13 14.17V3h-2v11.17l-3.59-3.58L6 12l6 6Z"/></svg>
+        <span data-i18n="cal_dl">Descarrega el calendari</span>
+      </button>
+    </div>
+    <div id="cal-list"></div>
+  </div>
+</section>
+
+<section class="block on-dark" id="galeria" aria-labelledby="h-gal">
+  <div class="wrap">
+    <h2 id="h-gal" data-i18n="gal_h">Galeria</h2>
+    <p class="lead" data-i18n="gal_lead">Fotos de la filà durant l'any i en festes.</p>
+    <p class="demo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg><span data-i18n="gal_demo">De moment hi ha detalls de l'escut: ací aniran les fotos de la filà.</span></p>
+    <div class="grid" id="grid"></div>
+  </div>
+  <dialog class="lightbox" id="lb" aria-label="Foto">
+    <div class="lb-inner">
+      <img id="lb-img" alt="">
+      <button class="lb-btn lb-close" type="button" data-lb="close" data-i18n-aria="close" aria-label="Tanca"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg></button>
+      <button class="lb-btn lb-prev" type="button" data-lb="prev" data-i18n-aria="prev" aria-label="Anterior"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59Z"/></svg></button>
+      <button class="lb-btn lb-next" type="button" data-lb="next" data-i18n-aria="next" aria-label="Següent"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L13.17 12l-4.58 4.59Z"/></svg></button>
+      <p class="lb-count" id="lb-count"></p>
+    </div>
+  </dialog>
+</section>
+
+<section class="block" id="inscripcions" aria-labelledby="h-form">
+  <div class="wrap form-wrap">
+    <h2 id="h-form" data-i18n="form_h">Inscripcions</h2>
+    <p class="lead" data-i18n="form_lead">Alta, boato, convidats o propostes de millora: tot des d'ací.</p>
+    <p class="demo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg><span data-i18n="form_demo">Mode de prova: el formulari funciona, però no s'envia ni es guarda res. No hi poses dades reals.</span></p>
+    <div id="form" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="block contact" id="contacte" aria-labelledby="h-contact">
+  <div class="wrap">
+    <h2 id="h-contact" data-i18n="contact_h">Contacte</h2>
+    <div class="contact-grid">
+      <div><h3 data-i18n="c_mail">Correu</h3><p><span class="ph" data-i18n="c_mail_ph">[correu de la filà]</span></p></div>
+      <div><h3 data-i18n="c_social">Xarxes</h3><p><span class="ph" data-i18n="c_social_ph">[Instagram de la filà]</span></p></div>
+      <div><h3 data-i18n="c_place">On som</h3><p><span class="ph" data-i18n="c_place_ph">[local de la filà]</span>, Muro d'Alcoi</p></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="f-brand"><img src="img/escudo-sm.png" alt="" width="22" height="30"><span>© <span id="year">2026</span> Filà Llana</span></div>
+    <span data-i18n="foot">Moros i Cristians de Muro d'Alcoi</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+
+/* ═══ Textos ═══ */
+var T={
+ va:{skip:"Salta al contingut",nav_cal:"Calendari",nav_gal:"Galeria",nav_form:"Inscripcions",nav_contact:"Contacte",menu:"Menú",
+  shield_alt:"Escut de la Filà Llana",tagline:"Moros i Cristians de Muro d'Alcoi",next_lbl:"Pròxim acte",next_btn:"Veure tot el calendari",
+  about_h:"La filà",
+  about_p1:"La Filà Llana és una colla de festers i festeres de Muro que viu els Moros i Cristians tot l'any: els assajos, els sopars, l'entrada i tot el que porta la festa.",
+  about_p2:"En aquesta web trobaràs el calendari d'actes, les fotos de la filà i els formularis per a donar-te d'alta, apuntar-te al boato o portar convidats.",
+  j1_t:"Vull apuntar-me",j1_s:"Alta, boato, convidats o propostes",j2_t:"Quan són els actes?",j2_s:"Descarrega el calendari al mòbil",j3_t:"Veure les fotos",j3_s:"La filà en la festa",
+  cal_h:"Calendari",cal_lead:"Tots els actes de la filà. Descarrega'ls i et sortiran al calendari del mòbil.",cal_demo:"Calendari de prova: les dates són d'exemple.",
+  cal_dl:"Descarrega el calendari",cal_add:"Afegir",cal_add_long:"Afegir al meu calendari",allday:"Tot el dia",
+  gal_h:"Galeria",gal_lead:"Fotos de la filà durant l'any i en festes.",gal_demo:"De moment hi ha detalls de l'escut: ací aniran les fotos de la filà.",
+  photo:"Foto",of:"de",close:"Tanca",prev:"Anterior",next:"Següent",open_photo:"Obri la foto",
+  form_h:"Inscripcions",form_lead:"Alta, boato, convidats o propostes de millora: tot des d'ací.",
+  form_demo:"Mode de prova: el formulari funciona, però no s'envia ni es guarda res. No hi poses dades reals.",
+  contact_h:"Contacte",c_mail:"Correu",c_mail_ph:"[correu de la filà]",c_social:"Xarxes",c_social_ph:"[Instagram de la filà]",c_place:"On som",c_place_ph:"[local de la filà]",
+  foot:"Moros i Cristians de Muro d'Alcoi",
+  f_req:"Aquesta pregunta és obligatòria",f_next:"Següent",f_back:"Enrere",f_send:"Envia",f_clear:"Esborra el formulari",f_choose:"Tria",
+  f_file:"Afegeix una foto",f_file_change:"Canvia la foto",f_file_big:"La foto ocupa més de 10 MB. Tria'n una més menuda.",f_file_type:"Ha de ser una imatge.",
+  f_done:"Moltes gràcies! Hem rebut la teua resposta.",f_demo_done:"Mode de prova: no s'ha enviat res.",f_sum:"Això és el que rebria la junta:",f_again:"Envia una altra resposta",
+  f_step:"Pas",f_confirm_clear:"Vols esborrar totes les respostes?"
+ },
+ es:{skip:"Saltar al contenido",nav_cal:"Calendario",nav_gal:"Galería",nav_form:"Inscripciones",nav_contact:"Contacto",menu:"Menú",
+  shield_alt:"Escudo de la Filà Llana",tagline:"Moros y Cristianos de Muro de Alcoy",next_lbl:"Próximo acto",next_btn:"Ver todo el calendario",
+  about_h:"La filà",
+  about_p1:"La Filà Llana es un grupo de festeros y festeras de Muro que vive los Moros y Cristianos todo el año: los ensayos, las cenas, la entrada y todo lo que trae la fiesta.",
+  about_p2:"En esta web encontrarás el calendario de actos, las fotos de la filà y los formularios para darte de alta, apuntarte al boato o traer invitados.",
+  j1_t:"Quiero apuntarme",j1_s:"Alta, boato, invitados o propuestas",j2_t:"¿Cuándo son los actos?",j2_s:"Descarga el calendario en el móvil",j3_t:"Ver las fotos",j3_s:"La filà en la fiesta",
+  cal_h:"Calendario",cal_lead:"Todos los actos de la filà. Descárgalos y te saldrán en el calendario del móvil.",cal_demo:"Calendario de prueba: las fechas son de ejemplo.",
+  cal_dl:"Descargar el calendario",cal_add:"Añadir",cal_add_long:"Añadir a mi calendario",allday:"Todo el día",
+  gal_h:"Galería",gal_lead:"Fotos de la filà durante el año y en fiestas.",gal_demo:"De momento hay detalles del escudo: aquí irán las fotos de la filà.",
+  photo:"Foto",of:"de",close:"Cerrar",prev:"Anterior",next:"Siguiente",open_photo:"Abrir la foto",
+  form_h:"Inscripciones",form_lead:"Alta, boato, invitados o propuestas de mejora: todo desde aquí.",
+  form_demo:"Modo de prueba: el formulario funciona, pero no se envía ni se guarda nada. No pongas datos reales.",
+  contact_h:"Contacto",c_mail:"Correo",c_mail_ph:"[correo de la filà]",c_social:"Redes",c_social_ph:"[Instagram de la filà]",c_place:"Dónde estamos",c_place_ph:"[local de la filà]",
+  foot:"Moros y Cristianos de Muro de Alcoy",
+  f_req:"Esta pregunta es obligatoria",f_next:"Siguiente",f_back:"Atrás",f_send:"Enviar",f_clear:"Borrar el formulario",f_choose:"Elige",
+  f_file:"Añadir una foto",f_file_change:"Cambiar la foto",f_file_big:"La foto ocupa más de 10 MB. Elige una más pequeña.",f_file_type:"Tiene que ser una imagen.",
+  f_done:"¡Muchas gracias! Hemos recibido tu respuesta.",f_demo_done:"Modo de prueba: no se ha enviado nada.",f_sum:"Esto es lo que recibiría la junta:",f_again:"Enviar otra respuesta",
+  f_step:"Paso",f_confirm_clear:"¿Quieres borrar todas las respuestas?"
+ }
+};
+var lang="va";
+try{var saved=localStorage.getItem("fila-lang");if(saved==="es"||saved==="va")lang=saved;}catch(e){}
+function t(k){return T[lang][k]||T.va[k]||k;}
+function L(x){return (x&&typeof x==="object")?(x[lang]||x.va):x;}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+var LOCALE=function(){return lang==="va"?"ca-ES":"es-ES";};
+
+/* ═══ Calendari (dates d'exemple) ═══ */
+var EVENTS=[
+ {id:"sopar-germanor",d:"2026-11-14",t:"21:30",dur:180,title:{va:"Sopar de germanor",es:"Cena de hermandad"},place:{va:"Local de la filà",es:"Local de la filà"}},
+ {id:"assemblea",d:"2026-11-28",t:"18:00",dur:120,title:{va:"Assemblea general",es:"Asamblea general"},place:{va:"Local de la filà",es:"Local de la filà"}},
+ {id:"dinar-nadal",d:"2026-12-19",t:"14:00",dur:180,title:{va:"Dinar de Nadal",es:"Comida de Navidad"},place:{va:"Lloc per concretar",es:"Lugar por concretar"}},
+ {id:"carrecs",d:"2027-01-23",t:"20:00",dur:150,title:{va:"Presentació de càrrecs",es:"Presentación de cargos"},place:{va:"Local de la filà",es:"Local de la filà"}},
+ {id:"assaig-boato",d:"2027-02-20",t:"17:00",dur:120,title:{va:"Assaig de boato",es:"Ensayo de boato"},place:{va:"Local de la filà",es:"Local de la filà"}},
+ {id:"prova-vestits",d:"2027-03-20",t:"11:00",dur:120,title:{va:"Prova de vestits",es:"Prueba de trajes"},place:{va:"Local de la filà",es:"Local de la filà"}},
+ {id:"sopar-festes",d:"2027-04-24",t:"21:00",dur:180,title:{va:"Sopar abans de festes",es:"Cena antes de fiestas"},place:{va:"Lloc per concretar",es:"Lugar por concretar"}},
+ {id:"festes",d:"2027-05-13",end:"2027-05-16",allday:true,title:{va:"Festes de Moros i Cristians",es:"Fiestas de Moros y Cristianos"},place:{va:"Muro d'Alcoi",es:"Muro de Alcoy"}}
+];
+function dt(ev){var p=ev.d.split("-").map(Number),h=[0,0];if(ev.t)h=ev.t.split(":").map(Number);return new Date(p[0],p[1]-1,p[2],h[0],h[1]);}
+function endOf(ev){if(ev.allday){var p=(ev.end||ev.d).split("-").map(Number);return new Date(p[0],p[1]-1,p[2],23,59);}return new Date(dt(ev).getTime()+ev.dur*60000);}
+function fmt(d,o){return new Intl.DateTimeFormat(LOCALE(),o).format(d);}
+function whenText(ev){
+  var d=dt(ev);
+  if(ev.allday){
+    var e=endOf(ev),txt=fmt(d,{day:"numeric",month:"long"});
+    if(ev.end&&ev.end!==ev.d) txt+=(lang==="va"?" al ":" al ")+fmt(e,{day:"numeric",month:"long"});
+    return txt+", "+L(ev.place);
+  }
+  return fmt(d,{weekday:"long",day:"numeric",month:"long"})+", "+ev.t+". "+L(ev.place);
+}
+function renderCalendar(){
+  var now=new Date(),html="",cur="";
+  EVENTS.forEach(function(ev){
+    var d=dt(ev),key=d.getFullYear()+"-"+d.getMonth();
+    if(key!==cur){
+      if(cur) html+="</ul>";
+      cur=key;
+      var mt=fmt(d,{month:"long",year:"numeric"});html+='<h3 class="month">'+esc(mt.charAt(0).toUpperCase()+mt.slice(1))+'</h3><ul class="events">';
+    }
+    var past=endOf(ev)<now;
+    var day=ev.allday&&ev.end?d.getDate()+"–"+endOf(ev).getDate():d.getDate();
+    var sub=ev.allday?t("allday")+", "+L(ev.place):ev.t+", "+L(ev.place);
+    html+='<li class="ev'+(past?' past':'')+'"><div class="ev-date"><b'+(ev.allday&&ev.end?' class="range"':'')+'>'+day+'</b><span>'+esc(fmt(d,{weekday:"short"}))+'</span></div>'+
+      '<div><h3>'+esc(L(ev.title))+'</h3><p>'+esc(sub)+'</p></div>'+
+      '<button type="button" class="btn btn-line" data-ics="'+ev.id+'" aria-label="'+esc(t("cal_add_long")+": "+L(ev.title))+'">'+
+      '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 16H5V9h14v11Zm-8-9h2v3h3v2h-3v3h-2v-3H8v-2h3v-3Z"/></svg>'+esc(t("cal_add"))+'</button></li>';
+  });
+  if(cur) html+="</ul>";
+  document.getElementById("cal-list").innerHTML=html;
+
+  var next=null;EVENTS.forEach(function(ev){if(!next&&endOf(ev)>=now)next=ev;});
+  var box=document.getElementById("next");
+  if(next){
+    var d=dt(next);
+    document.getElementById("next-day").innerHTML=d.getDate()+"<small>"+esc(fmt(d,{month:"short"}).replace(".","").toUpperCase())+"</small>";
+    document.getElementById("next-title").textContent=L(next.title);
+    document.getElementById("next-when").textContent=whenText(next);
+    box.hidden=false;
+  }else box.hidden=true;
+}
+
+/* .ics */
+function pad(n){return (n<10?"0":"")+n;}
+function icsLocal(d){return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"T"+pad(d.getHours())+pad(d.getMinutes())+"00";}
+function icsDate(s){return s.replace(/-/g,"");}
+function icsEsc(s){return String(s).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
+function fold(line){var out="",s=line;while(s.length>70){out+=s.slice(0,70)+"\r\n ";s=s.slice(70);}return out+s;}
+function buildICS(list){
+  var stamp=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
+  var L1=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Fila Llana//Web//CA","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:Filà Llana","X-WR-TIMEZONE:Europe/Madrid",
+   "BEGIN:VTIMEZONE","TZID:Europe/Madrid",
+   "BEGIN:DAYLIGHT","TZOFFSETFROM:+0100","TZOFFSETTO:+0200","TZNAME:CEST","DTSTART:19700329T020000","RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU","END:DAYLIGHT",
+   "BEGIN:STANDARD","TZOFFSETFROM:+0200","TZOFFSETTO:+0100","TZNAME:CET","DTSTART:19701025T030000","RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU","END:STANDARD",
+   "END:VTIMEZONE"];
+  list.forEach(function(ev){
+    L1.push("BEGIN:VEVENT","UID:"+ev.id+"@fila-llana","DTSTAMP:"+stamp);
+    if(ev.allday){
+      var e=endOf(ev);e=new Date(e.getFullYear(),e.getMonth(),e.getDate()+1);
+      L1.push("DTSTART;VALUE=DATE:"+icsDate(ev.d),"DTEND;VALUE=DATE:"+e.getFullYear()+pad(e.getMonth()+1)+pad(e.getDate()));
+    }else{
+      L1.push("DTSTART;TZID=Europe/Madrid:"+icsLocal(dt(ev)),"DTEND;TZID=Europe/Madrid:"+icsLocal(endOf(ev)));
+    }
+    L1.push("SUMMARY:"+icsEsc(L(ev.title)+" (Filà Llana)"),"LOCATION:"+icsEsc(L(ev.place)),"END:VEVENT");
+  });
+  L1.push("END:VCALENDAR");
+  return L1.map(fold).join("\r\n")+"\r\n";
+}
+function download(name,text){
+  var blob=new Blob([text],{type:"text/calendar;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+  a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
+  setTimeout(function(){URL.revokeObjectURL(url);},4000);
+}
+document.getElementById("dl-all").addEventListener("click",function(){download("calendari-fila-llana.ics",buildICS(EVENTS));});
+document.getElementById("cal-list").addEventListener("click",function(e){
+  var b=e.target.closest("[data-ics]");if(!b)return;
+  var ev=EVENTS.filter(function(x){return x.id===b.getAttribute("data-ics");})[0];
+  if(ev) download(ev.id+".ics",buildICS([ev]));
+});
+
+/* ═══ Galeria ═══ */
+var PHOTOS=["img/galeria-6.jpg","img/galeria-1.jpg","img/galeria-2.jpg","img/galeria-3.jpg","img/galeria-4.jpg","img/galeria-5.jpg"];
+var grid=document.getElementById("grid"),lb=document.getElementById("lb"),lbImg=document.getElementById("lb-img"),lbCount=document.getElementById("lb-count"),lbIdx=0;
+function renderGallery(){
+  grid.innerHTML=PHOTOS.map(function(src,i){
+    return '<button type="button" data-i="'+i+'" aria-label="'+esc(t("open_photo")+" "+(i+1))+'"><img src="'+src+'" alt="" loading="lazy" decoding="async"></button>';
+  }).join("");
+}
+function showPhoto(i){lbIdx=(i+PHOTOS.length)%PHOTOS.length;lbImg.src=PHOTOS[lbIdx];lbImg.alt=t("photo")+" "+(lbIdx+1);lbCount.textContent=t("photo")+" "+(lbIdx+1)+" "+t("of")+" "+PHOTOS.length;}
+grid.addEventListener("click",function(e){var b=e.target.closest("button[data-i]");if(!b)return;showPhoto(+b.getAttribute("data-i"));if(lb.showModal)lb.showModal();else lb.setAttribute("open","");});
+lb.addEventListener("click",function(e){
+  var b=e.target.closest("[data-lb]");
+  if(b){var a=b.getAttribute("data-lb");if(a==="close")lb.close();else if(a==="prev")showPhoto(lbIdx-1);else showPhoto(lbIdx+1);return;}
+  if(e.target===lb||e.target.classList.contains("lb-inner"))lb.close();
+});
+lb.addEventListener("keydown",function(e){if(e.key==="ArrowLeft")showPhoto(lbIdx-1);if(e.key==="ArrowRight")showPhoto(lbIdx+1);});
+var tx=null;
+lb.addEventListener("touchstart",function(e){tx=e.touches[0].clientX;},{passive:true});
+lb.addEventListener("touchend",function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)showPhoto(lbIdx+(dx<0?1:-1));tx=null;});
+
+/* ═══ Formulari ═══ */
+var DNI_RE=/^\s*([0-9]{8}|[XYZxyz][0-9]{7})[- ]?[A-Za-z]\s*$/;
+var MOB_RE=/^\s*(\+34[\s-]?)?[67]([\s-]?[0-9]){8}\s*$/;
+var PH_MAIL={va:'<span class="ph">[correu de la filà]</span>',es:'<span class="ph">[correo de la filà]</span>'};
+var SECTIONS=[
+ {id:"inici",title:{va:"Formulari de la filà",es:"Formulario de la filà"},desc:{va:"Tria què vols fer i només veuràs les preguntes que et toquen.",es:"Elige qué quieres hacer y solo verás las preguntas que te tocan."},questions:[
+   {id:"accio",type:"radio",branch:true,required:true,label:{va:"Què vols fer?",es:"¿Qué quieres hacer?"},options:[
+     {v:{va:"Donar-me d'alta a la filà",es:"Darme de alta en la filà"},go:"dades"},
+     {v:{va:"Apuntar-me al boato",es:"Apuntarme al boato"},go:"boato"},
+     {v:{va:"Apuntar convidats",es:"Apuntar invitados"},go:"convidats"},
+     {v:{va:"Proposar millores per a la filà",es:"Proponer mejoras para la filà"},go:"millores"}]}]},
+ {id:"boato",next:"dades",title:{va:"Inscripció al boato",es:"Inscripción al boato"},desc:{va:"Contesta aquesta pregunta i després et demanarem les dades personals.",es:"Contesta esta pregunta y después te pediremos los datos personales."},questions:[
+   {id:"targeta",type:"radio",required:true,label:{va:"Tens targeta festera?",es:"¿Tienes tarjeta festera?"},options:[{v:{va:"Sí",es:"Sí"}},{v:{va:"No",es:"No"}}]}]},
+ {id:"dades",next:"submit",title:{va:"Dades personals",es:"Datos personales"},desc:{va:"Les necessitem per a tramitar l'alta o la inscripció al boato. Tingues el DNI a mà: et demanarem una foto de cada cara.",es:"Los necesitamos para tramitar el alta o la inscripción al boato. Ten el DNI a mano: te pediremos una foto de cada cara."},questions:[
+   {id:"nom",type:"text",required:true,label:{va:"Nom",es:"Nombre"},ac:"given-name"},
+   {id:"cognoms",type:"text",required:true,label:{va:"Cognoms",es:"Apellidos"},ac:"family-name"},
+   {id:"naix",type:"date",required:true,label:{va:"Data de naixement",es:"Fecha de nacimiento"},ac:"bday"},
+   {id:"dni",type:"text",required:true,label:{va:"Número de DNI",es:"Número de DNI"},help:{va:"8 números i la lletra, tot junt (ex.: 12345678Z).",es:"8 números y la letra, todo junto (ej.: 12345678Z)."},pattern:DNI_RE,err:{va:"Escriu els 8 números i la lletra del DNI (ex.: 12345678Z).",es:"Escribe los 8 números y la letra del DNI (ej.: 12345678Z)."}},
+   {id:"mobil",type:"tel",required:true,label:{va:"Telèfon mòbil",es:"Teléfono móvil"},help:{va:"9 xifres.",es:"9 cifras."},pattern:MOB_RE,err:{va:"Escriu un mòbil de 9 xifres (ex.: 612 345 678).",es:"Escribe un móvil de 9 cifras (ej.: 612 345 678)."},ac:"tel"},
+   {id:"dni_davant",type:"file",required:true,label:{va:"Foto del DNI (per davant)",es:"Foto del DNI (por delante)"},help:{va:"Una foto on es llija bé. Pots fer-la amb el mòbil.",es:"Una foto en la que se lea bien. Puedes hacerla con el móvil."}},
+   {id:"dni_darrere",type:"file",required:true,label:{va:"Foto del DNI (per darrere)",es:"Foto del DNI (por detrás)"},help:{va:"Una foto on es llija bé.",es:"Una foto en la que se lea bien."}},
+   {id:"rgpd",type:"checkbox",required:true,label:{va:"Protecció de dades",es:"Protección de datos"},
+    helpHtml:{va:"Responsable: Filà Llana. Finalitat: gestionar l'alta o la inscripció al boato. No cedirem les teues dades a ningú, llevat que siga necessari per a la gestió de la festa. Per a exercir els teus drets, escriu a "+PH_MAIL.va+".",
+              es:"Responsable: Filà Llana. Finalidad: gestionar el alta o la inscripción al boato. No cederemos tus datos a nadie, salvo que sea necesario para la gestión de la fiesta. Para ejercer tus derechos, escribe a "+PH_MAIL.es+"."},
+    options:[{v:{va:"Accepte que la Filà Llana guarde i utilitze aquestes dades només per a la gestió de la filà.",es:"Acepto que la Filà Llana guarde y utilice estos datos solo para la gestión de la filà."}}]}]},
+ {id:"convidats",next:"submit",title:{va:"Convidats",es:"Invitados"},desc:{va:"Apunta ací les persones que vols convidar.",es:"Apunta aquí a las personas que quieres invitar."},questions:[
+   {id:"qui",type:"text",required:true,label:{va:"Nom i cognoms del fester o festera que convida",es:"Nombre y apellidos del festero o festera que invita"}},
+   {id:"acte",type:"text",required:true,label:{va:"Per a quin acte o dia?",es:"¿Para qué acto o día?"}},
+   {id:"quants",type:"select",required:true,label:{va:"Quants convidats portes?",es:"¿Cuántos invitados traes?"},options:[1,2,3,4,5,6,7,8,9,10]},
+   {id:"noms",type:"textarea",required:true,label:{va:"Noms i cognoms dels convidats",es:"Nombres y apellidos de los invitados"},help:{va:"Un per línia.",es:"Uno por línea."}}]},
+ {id:"millores",next:"submit",title:{va:"Millores per a la filà",es:"Mejoras para la filà"},desc:{va:"Aquest espai és teu. Digues-nos què milloraries de la filà, siga del que siga: actes, local, organització, comunicació, economia… La junta ho llegirà tot.",es:"Este espacio es tuyo. Dinos qué mejorarías de la filà, sea lo que sea: actos, local, organización, comunicación, economía… La junta lo leerá todo."},questions:[
+   {id:"millora",type:"textarea",required:true,label:{va:"Què milloraries?",es:"¿Qué mejorarías?"},help:{va:"Escriu tot el que vulgues.",es:"Escribe todo lo que quieras."}},
+   {id:"nom_m",type:"text",required:true,label:{va:"Nom i cognoms",es:"Nombre y apellidos"},help:{va:"Saber qui eres ens ajuda molt: així en podrem parlar amb tu.",es:"Saber quién eres nos ayuda mucho: así podremos hablarlo contigo."}}]}
+];
+var byId={},QMAP={};
+SECTIONS.forEach(function(s){byId[s.id]=s;s.questions.forEach(function(q){QMAP[q.id]=q;});});
+var F={cur:"inici",hist:[],ans:{},files:{},done:false};
+var formEl=document.getElementById("form");
+
+function totalSteps(){
+  var a=F.ans.accio;if(a==null) return 3;
+  var n=0,id="inici";while(id&&id!=="submit"&&n<10){n++;id=(id==="inici")?QMAP.accio.options[a].go:byId[id].next;}
+  return n;
+}
+function qHTML(q){
+  var v=F.ans[q.id],h='<div class="q" id="q-'+q.id+'">',lid="l-"+q.id,eid="e-"+q.id;
+  var aria=' aria-describedby="'+eid+(q.help?' h-'+q.id:'')+'"'+(q.required?' aria-required="true"':'');
+  if(q.type==="radio"||q.type==="checkbox") h+='<p class="q-label" id="'+lid+'">'+esc(L(q.label))+(q.required?'<span class="star" aria-hidden="true">*</span>':'')+'</p>';
+  else if(q.type==="file") h+='<p class="q-label" id="'+lid+'">'+esc(L(q.label))+(q.required?'<span class="star" aria-hidden="true">*</span>':'')+'</p>';
+  else h+='<label class="q-label" id="'+lid+'" for="f-'+q.id+'">'+esc(L(q.label))+(q.required?'<span class="star" aria-hidden="true">*</span>':'')+'</label>';
+  if(q.helpHtml) h+='<p class="q-help" id="h-'+q.id+'">'+L(q.helpHtml)+'</p>';
+  else if(q.help) h+='<p class="q-help" id="h-'+q.id+'">'+esc(L(q.help))+'</p>';
+  if(q.type==="radio"){
+    h+='<div class="opts" role="radiogroup" aria-labelledby="'+lid+'"'+aria+'>'+q.options.map(function(o,i){
+      return '<label class="opt"><input type="radio" name="'+q.id+'" value="'+i+'" data-q="'+q.id+'"'+(v===i?' checked':'')+'><span>'+esc(L(o.v))+'</span></label>';}).join("")+'</div>';
+  }else if(q.type==="checkbox"){
+    h+='<div class="opts" role="group" aria-labelledby="'+lid+'"'+aria+'>'+q.options.map(function(o){
+      return '<label class="opt"><input type="checkbox" data-q="'+q.id+'"'+(v?' checked':'')+'><span>'+esc(L(o.v))+'</span></label>';}).join("")+'</div>';
+  }else if(q.type==="textarea"){
+    h+='<textarea class="inp" id="f-'+q.id+'" data-q="'+q.id+'"'+aria+'>'+esc(v||"")+'</textarea>';
+  }else if(q.type==="select"){
+    h+='<select class="inp" id="f-'+q.id+'" data-q="'+q.id+'"'+aria+'><option value="">'+esc(t("f_choose"))+'</option>'+q.options.map(function(o){
+      return '<option'+(String(v)===String(o)?' selected':'')+'>'+o+'</option>';}).join("")+'</select>';
+  }else if(q.type==="file"){
+    var f=F.files[q.id];
+    h+='<div class="file"><label class="file-btn"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm8-4h-3.17L15 3H9L7.17 5H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm-8 13a5 5 0 1 1 0-10 5 5 0 0 1 0 10Z"/></svg><span>'+esc(f?t("f_file_change"):t("f_file"))+'</span>'+
+       '<input type="file" accept="image/*" data-q="'+q.id+'" aria-labelledby="'+lid+'"'+aria+'></label>'+
+       (f?'<span class="file-prev"><img src="'+f.url+'" alt=""><span>'+esc(f.name)+'</span></span>':'')+'</div>';
+  }else{
+    h+='<input class="inp" id="f-'+q.id+'" type="'+(q.type==="tel"?"tel":q.type==="date"?"date":"text")+'"'+(q.type==="tel"?' inputmode="tel"':'')+(q.ac?' autocomplete="'+q.ac+'"':'')+' data-q="'+q.id+'"'+aria+' value="'+esc(v||"")+'">';
+  }
+  h+='<p class="q-err" id="'+eid+'"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-2h2v2Zm0-4h-2V7h2v6Z"/></svg><span></span></p>';
+  return h+'</div>';
+}
+function renderForm(focus){
+  var html;
+  if(F.done){
+    var rows="",path=F.hist.concat([F.cur]);
+    path.forEach(function(id){byId[id].questions.forEach(function(q){
+      var v=F.ans[q.id];
+      if(q.type==="radio") v=(v==null)?"":L(q.options[v].v);
+      else if(q.type==="checkbox") v=v?L(q.options[0].v):"";
+      else if(q.type==="file") v=F.files[q.id]?F.files[q.id].name:"";
+      else if(q.type==="date"&&v){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v);if(m)v=m[3]+"/"+m[2]+"/"+m[1];}
+      rows+='<dt>'+esc(L(q.label))+'</dt><dd>'+esc(v||"—")+'</dd>';
+    });});
+    html='<div class="fcard"><div class="fhead"><h3 tabindex="-1">'+esc(t("f_done"))+'</h3><p>'+esc(t("f_demo_done"))+'</p></div><div class="fbody">'+
+      '<div class="sum"><h4>'+esc(t("f_sum"))+'</h4><dl>'+rows+'</dl></div>'+
+      '<div class="fnav"><button type="button" class="btn btn-red" data-act="again">'+esc(t("f_again"))+'</button></div></div></div>';
+  }else{
+    var s=byId[F.cur],step=F.hist.length+1,tot=Math.max(totalSteps(),step),bars="";
+    for(var i=1;i<=tot;i++) bars+='<i class="'+(i<=step?'on':'')+'"></i>';
+    var isLast=(s.id!=="inici"&&s.next==="submit");
+    html='<div class="steps" role="img" aria-label="'+esc(t("f_step")+" "+step+" "+t("of")+" "+tot)+'">'+bars+'</div>'+
+      '<div class="fcard"><div class="fhead"><h3 tabindex="-1">'+esc(L(s.title))+'</h3>'+(s.desc?'<p>'+esc(L(s.desc))+'</p>':'')+'</div><div class="fbody">'+
+      s.questions.map(qHTML).join("")+
+      '<div class="fnav">'+(F.hist.length?'<button type="button" class="btn btn-line" data-act="back">'+esc(t("f_back"))+'</button>':'')+
+      '<button type="button" class="btn btn-red" data-act="next">'+esc(isLast?t("f_send"):t("f_next"))+'</button>'+
+      '<button type="button" class="linkish grow" data-act="clear">'+esc(t("f_clear"))+'</button></div></div></div>';
+  }
+  formEl.innerHTML=html;
+  if(focus){var h=formEl.querySelector("h3");if(h){h.focus({preventScroll:true});}
+    var top=formEl.getBoundingClientRect().top+window.scrollY-90;if(window.scrollY>top)window.scrollTo({top:top,behavior:"smooth"});}
+}
+function isEmpty(q){var v=F.ans[q.id];if(q.type==="file")return !F.files[q.id];if(q.type==="checkbox")return !v;return v==null||String(v).trim()==="";}
+function check(q){
+  if(q.required&&isEmpty(q)) return t("f_req");
+  if(q.pattern&&!isEmpty(q)&&!q.pattern.test(String(F.ans[q.id]))) return L(q.err);
+  if(q.type==="file"&&F.files[q.id]&&F.files[q.id].error) return F.files[q.id].error;
+  return null;
+}
+function setErr(q,msg){
+  var c=document.getElementById("q-"+q.id);if(!c)return;
+  c.classList.toggle("invalid",!!msg);c.querySelector(".q-err span").textContent=msg||"";
+  Array.prototype.forEach.call(c.querySelectorAll("[data-q],.opts"),function(el){if(msg)el.setAttribute("aria-invalid","true");else el.removeAttribute("aria-invalid");});
+}
+formEl.addEventListener("input",function(e){
+  var id=e.target.getAttribute("data-q");if(!id)return;var q=QMAP[id];
+  if(q.type==="radio") F.ans[id]=+e.target.value;
+  else if(q.type==="checkbox") F.ans[id]=e.target.checked;
+  else if(q.type!=="file") F.ans[id]=e.target.value;
+  if(document.getElementById("q-"+id).classList.contains("invalid")) setErr(q,check(q));
+});
+formEl.addEventListener("change",function(e){
+  var id=e.target.getAttribute("data-q");if(!id)return;var q=QMAP[id];
+  if(q.type==="radio"||q.type==="checkbox"){F.ans[id]=q.type==="radio"?+e.target.value:e.target.checked;setErr(q,null);if(q.branch)renderStepsOnly();return;}
+  if(q.type!=="file")return;
+  var file=e.target.files&&e.target.files[0];if(!file)return;
+  if(F.files[id]&&F.files[id].url) URL.revokeObjectURL(F.files[id].url);
+  var err=null;
+  if(!/^image\//.test(file.type)) err=t("f_file_type");
+  else if(file.size>10*1024*1024) err=t("f_file_big");
+  F.files[id]=err?null:{name:file.name,url:URL.createObjectURL(file)};
+  var c=document.getElementById("q-"+id),tmp=document.createElement("div");tmp.innerHTML=qHTML(q);c.replaceWith(tmp.firstChild);
+  setErr(q,err);
+  var inp=document.querySelector('#q-'+id+' input[type=file]');if(inp)inp.focus();
+});
+function renderStepsOnly(){
+  var bar=formEl.querySelector(".steps");if(!bar)return;
+  var step=F.hist.length+1,tot=Math.max(totalSteps(),step),b="";
+  for(var i=1;i<=tot;i++) b+='<i class="'+(i<=step?'on':'')+'"></i>';
+  bar.innerHTML=b;bar.setAttribute("aria-label",t("f_step")+" "+step+" "+t("of")+" "+tot);
+}
+formEl.addEventListener("click",function(e){
+  var b=e.target.closest("[data-act]");if(!b)return;var act=b.getAttribute("data-act");
+  if(act==="next"){
+    var s=byId[F.cur],first=null;
+    s.questions.forEach(function(q){var m=check(q);setErr(q,m);if(m&&!first)first=q;});
+    if(first){var c=document.getElementById("q-"+first.id),f=c.querySelector("input,textarea,select");c.scrollIntoView({block:"center",behavior:"smooth"});if(f)f.focus({preventScroll:true});return;}
+    var to=(s.id==="inici")?QMAP.accio.options[F.ans.accio].go:s.next;
+    if(to==="submit"){F.done=true;}else{F.hist.push(F.cur);F.cur=to;}
+    renderForm(true);
+  }else if(act==="back"){F.cur=F.hist.pop()||"inici";renderForm(true);}
+  else if(act==="clear"){if(!window.confirm(t("f_confirm_clear")))return;resetForm();renderForm(true);}
+  else if(act==="again"){resetForm();renderForm(true);}
+});
+function resetForm(){Object.keys(F.files).forEach(function(k){if(F.files[k])URL.revokeObjectURL(F.files[k].url);});F.cur="inici";F.hist=[];F.ans={};F.files={};F.done=false;}
+
+/* ═══ Idioma ═══ */
+function applyLang(){
+  document.documentElement.lang=lang==="va"?"ca-ES-valencia":"es";
+  Array.prototype.forEach.call(document.querySelectorAll("[data-i18n]"),function(el){el.textContent=t(el.getAttribute("data-i18n"));});
+  Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-aria]"),function(el){el.setAttribute("aria-label",t(el.getAttribute("data-i18n-aria")));});
+  Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-alt]"),function(el){el.alt=t(el.getAttribute("data-i18n-alt"));});
+  Array.prototype.forEach.call(document.querySelectorAll(".lang button"),function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-lang")===lang));});
+  document.title=lang==="va"?"Filà Llana · Muro d'Alcoi":"Filà Llana · Muro de Alcoy";
+  renderCalendar();renderGallery();renderForm(false);
+}
+Array.prototype.forEach.call(document.querySelectorAll(".lang button"),function(b){
+  b.addEventListener("click",function(){lang=b.getAttribute("data-lang");try{localStorage.setItem("fila-lang",lang);}catch(e){}applyLang();});
+});
+
+/* Menú del mòbil */
+var menuBtn=document.querySelector(".menu-btn"),nav=document.getElementById("nav");
+menuBtn.addEventListener("click",function(){var o=nav.classList.toggle("open");menuBtn.setAttribute("aria-expanded",String(o));});
+nav.addEventListener("click",function(e){if(e.target.closest("a")){nav.classList.remove("open");menuBtn.setAttribute("aria-expanded","false");}});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&nav.classList.contains("open")){nav.classList.remove("open");menuBtn.setAttribute("aria-expanded","false");menuBtn.focus();}});
+
+document.getElementById("year").textContent=new Date().getFullYear();
+applyLang();
+})();
+</script>
+</body>
+</html>
