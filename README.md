@@ -11,7 +11,7 @@ La pàgina del calendari llig el calendari «Filà Llana» de Google Calendar (c
 - `id`: l'ID del calendari (Configuració del calendari > Integra el calendari).
 - `key`: una clau de l'API de Google Calendar, restringida a `albertosil8.github.io`.
 
-Mentre `id` estiga buit, la web ensenya un calendari de prova.
+Mentre `id` estiga buit, la web ensenya els actes posats a mà en `LOCAL` (calendari fester 2027 de la Junta de Festes i actes de la filà).
 
 Els actes oficials de la Junta de Festes s'escriuen amb «Oficial ·» davant del nom (per exemple, «Oficial · Entrada de bandes»). La web els pinta en daurat i lleva la paraula; els de la filà ixen en roig.
 

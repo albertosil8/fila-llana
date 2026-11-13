@@ -333,7 +333,6 @@ footer .f-brand{display:flex;align-items:center;gap:12px}
   <div class="wrap">
     <h2 id="h-cal" data-i18n="cal_h" tabindex="-1">Calendari</h2>
     <p class="lead" data-i18n="cal_lead">Els actes de la filà i els oficials de la Junta de Festes, tots en un calendari.</p>
-    <p class="demo" id="cal-demo" hidden><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg><span data-i18n="cal_demo">Calendari de prova: les dates són d'exemple.</span></p>
 
     <div class="sub">
       <div class="sub-txt">
@@ -354,7 +353,7 @@ footer .f-brand{display:flex;align-items:center;gap:12px}
           <span data-i18n="sub_copy">Copia l'enllaç</span>
         </button>
       </div>
-      <p class="sub-off" id="sub-off" data-i18n="sub_off" hidden>Calendari de prova: els botons funcionaran quan el connectem amb el calendari de la filà.</p>
+      <p class="sub-off" id="sub-off" data-i18n="sub_off" hidden>Els botons per a subscriure's s'activaran quan connectem el calendari de Google de la filà.</p>
       <p class="sub-msg" id="sub-msg" role="status" aria-live="polite"></p>
       <details class="how">
         <summary data-i18n="how_h">Com s'afig?</summary>
@@ -442,10 +441,10 @@ var T={
   about_p1:"La Filà Llana és una colla de festers i festeres de Muro que viu els Moros i Cristians tot l'any: els assajos, els sopars, l'entrada i tot el que porta la festa.",
   about_p2:"En aquesta web trobaràs el calendari d'actes, les fotos de la filà i els formularis per a donar-te d'alta, apuntar-te al boato o portar convidats.",
   j1_t:"Vull apuntar-me",j1_s:"Alta, boato, convidats o propostes",j2_t:"Quan són els actes?",j2_s:"Afig el calendari al mòbil",j3_t:"Veure les fotos",j3_s:"La filà en la festa",
-  cal_h:"Calendari",cal_lead:"Els actes de la filà i els oficials de la Junta de Festes, tots en un calendari.",cal_demo:"Calendari de prova: les dates són d'exemple.",
+  cal_h:"Calendari",cal_lead:"Els actes de la filà i els oficials de la Junta de Festes, tots en un calendari.",
   allday:"Tot el dia",
   sub_h:"Tin el calendari al mòbil",sub_p:"Subscriu-te una sola vegada: et sortiran tots els actes i, si en canviem algun, es canviarà sol.",
-  sub_copy:"Copia l'enllaç",sub_off:"Calendari de prova: els botons funcionaran quan el connectem amb el calendari de la filà.",
+  sub_copy:"Copia l'enllaç",sub_off:"Els botons per a subscriure's s'activaran quan connectem el calendari de Google de la filà.",
   copied:"Enllaç copiat. Afig-lo a la teua aplicació de calendari com a calendari per URL.",copy_manual:"Copia aquest enllaç:",
   how_h:"Com s'afig?",how_ios:"Toca «iPhone» i accepta la subscripció. Ja està.",
   how_and:"Toca «Android»: s'obrirà Google Calendar; toca «Afegir». Si des del mòbil no et deixa, fes-ho una vegada des d'un ordinador amb el mateix compte de Google i et sortirà també al mòbil.",
@@ -472,10 +471,10 @@ var T={
   about_p1:"La Filà Llana es un grupo de festeros y festeras de Muro que vive los Moros y Cristianos todo el año: los ensayos, las cenas, la entrada y todo lo que trae la fiesta.",
   about_p2:"En esta web encontrarás el calendario de actos, las fotos de la filà y los formularios para darte de alta, apuntarte al boato o traer invitados.",
   j1_t:"Quiero apuntarme",j1_s:"Alta, boato, invitados o propuestas",j2_t:"¿Cuándo son los actos?",j2_s:"Añade el calendario al móvil",j3_t:"Ver las fotos",j3_s:"La filà en la fiesta",
-  cal_h:"Calendario",cal_lead:"Los actos de la filà y los oficiales de la Junta de Fiestas, todos en un calendario.",cal_demo:"Calendario de prueba: las fechas son de ejemplo.",
+  cal_h:"Calendario",cal_lead:"Los actos de la filà y los oficiales de la Junta de Fiestas, todos en un calendario.",
   allday:"Todo el día",
   sub_h:"Ten el calendario en el móvil",sub_p:"Suscríbete una sola vez: te saldrán todos los actos y, si cambiamos alguno, se cambiará solo.",
-  sub_copy:"Copiar el enlace",sub_off:"Calendario de prueba: los botones funcionarán cuando lo conectemos con el calendario de la filà.",
+  sub_copy:"Copiar el enlace",sub_off:"Los botones para suscribirse se activarán cuando conectemos el calendario de Google de la filà.",
   copied:"Enlace copiado. Añádelo en tu aplicación de calendario como calendario por URL.",copy_manual:"Copia este enlace:",
   how_h:"¿Cómo se añade?",how_ios:"Toca «iPhone» y acepta la suscripción. Ya está.",
   how_and:"Toca «Android»: se abrirá Google Calendar; toca «Añadir». Si desde el móvil no te deja, hazlo una vez desde un ordenador con la misma cuenta de Google y te saldrá también en el móvil.",
@@ -507,7 +506,7 @@ var LOCALE=function(){return lang==="va"?"ca-ES":"es-ES";};
 /* ═══ Calendari ═══
    Llig el calendari «Filà Llana» de Google Calendar (compte filallanamuro@gmail.com).
    Els actes que comencen per «Oficial ·» són de la Junta de Festes: ixen en daurat i sense la paraula davant.
-   Mentre CAL.id estiga buit, la web ensenya un calendari de prova. */
+   Mentre CAL.id estiga buit, la web ensenya els actes de LOCAL (més avall). */
 var CAL={
   id:"",   // ID del calendari: Configuració del calendari > Integra el calendari > ID del calendari
   key:""   // Clau de l'API de Google Calendar, restringida a albertosil8.github.io
@@ -547,25 +546,39 @@ function rangeText(ev){
 function evPast(ev){return ev.allday?ev.e<TODAY:(ev.endMs||0)<Date.now();}
 function evTitle(ev){return ev.title?L(ev.title):t("untitled");}
 
-/* Calendari de prova (mentre no estiga connectat) */
-function demoEvents(){
-  var D=[
-   ["2026-11-14","21:30",180,0,{va:"Sopar de germanor",es:"Cena de hermandad"},{va:"Local de la filà",es:"Local de la filà"}],
-   ["2026-11-21","20:00",90,1,{va:"Presentació del cartell de festes",es:"Presentación del cartel de fiestas"},{va:"Lloc per concretar",es:"Lugar por concretar"}],
-   ["2026-11-28","18:00",120,0,{va:"Assemblea general",es:"Asamblea general"},{va:"Local de la filà",es:"Local de la filà"}],
-   ["2026-12-19","14:00",180,0,{va:"Dinar de Nadal",es:"Comida de Navidad"},{va:"Lloc per concretar",es:"Lugar por concretar"}],
-   ["2027-01-23","20:00",150,1,{va:"Presentació de càrrecs festers",es:"Presentación de cargos festeros"},{va:"Lloc per concretar",es:"Lugar por concretar"}],
-   ["2027-02-20","17:00",120,0,{va:"Assaig de boato",es:"Ensayo de boato"},{va:"Local de la filà",es:"Local de la filà"}],
-   ["2027-03-20","11:00",120,0,{va:"Prova de vestits",es:"Prueba de trajes"},{va:"Local de la filà",es:"Local de la filà"}],
-   ["2027-04-24","21:00",180,0,{va:"Sopar abans de festes",es:"Cena antes de fiestas"},{va:"Lloc per concretar",es:"Lugar por concretar"}],
-   ["2027-05-13","",0,1,{va:"Festes de Moros i Cristians",es:"Fiestas de Moros y Cristianos"},{va:"Muro d'Alcoi",es:"Muro de Alcoy"},"2027-05-16"]
-  ];
-  return D.map(function(r,i){
-    var ev={id:"prova-"+i,d:r[0],t:r[1],oficial:!!r[3],title:r[4],place:r[5],desc:""};
-    if(!r[1]){ev.allday=true;ev.e=r[6]||r[0];}
-    else{ev.e=r[0];ev.startMs=Date.parse(r[0]+"T"+r[1]+":00+01:00");ev.endMs=ev.startMs+r[2]*60000;}
+/* Actes posats a mà mentre el calendari de Google no estiga connectat.
+   [tipus: "f" filà / "o" oficial (Junta de Festes), data, data final (si dura més d'un dia), hora, acte, lloc, nota] */
+var LOCAL=[
+ ["f","2026-11-14","","18:30","Inici entraeta Llana","",""],
+ ["o","2027-01-15","2027-01-17","","Exposició de fotos (Fireta Sant Antoni)","Castell Festes",""],
+ ["o","2027-01-30","","09:00","Curset tiradors pólvora (Variable)","Castell Festes",""],
+ ["o","2027-01-30","","19:00","Elecció de l'Angelet de la Publicà. Lliurament de premis de dibuixos i redaccions","Centre Cultural",""],
+ ["o","2027-03-20","","19:00","Presentació del Cartell, Revista i Càrrecs festers","Centre Cultural",""],
+ ["o","2027-03-20","","21:30","Sopar de presentació de càrrecs festers","",""],
+ ["o","2027-03-27","","09:00","Muntatge Castell i banderes","Castell Festes",""],
+ ["o","2027-03-29","","00:00","Pasqua (Entraeta)","","Nit del 28 al 29 de març."],
+ ["o","2027-04-04","","12:00","Publicà","",""],
+ ["o","2027-04-10","","14:00","Dinar de germanor (Paella gegant)","Plaça Matzem",""],
+ ["o","2027-05-01","","18:30","Concert de música festera","Centre Cultural",""],
+ ["o","2027-05-01","","20:00","La Baixà","",""],
+ ["o","2027-05-02","","00:00","Entraeta oficial","","Nit de l'1 al 2 de maig."],
+ ["o","2027-05-03","2027-05-06","","Setmana gran","",""],
+ ["o","2027-05-07","","20:00","La Vespra (Passacarrer)","",""],
+ ["o","2027-05-08","2027-05-10","","Festes","",""],
+ ["o","2027-05-11","","","Dia del Descans","",""],
+ ["o","2027-05-16","","","Diumenge de la Pujà","",""],
+ ["o","2027-05-16","","00:00","Vespra de la Pujà (Entraeta)","","Nit del 15 al 16 de maig."],
+ ["o","2027-05-22","","09:00","Desmuntatge Castell i banderes","Castell Festes",""]
+];
+function lastSunday(y,m){var d=new Date(Date.UTC(y,m,0));return d.getUTCDate()-d.getUTCDay();}
+function madridOffset(s){var p=p3(s),a=p[1]*100+p[2];return (a>=300+lastSunday(p[0],3)&&a<1000+lastSunday(p[0],10))?"+02:00":"+01:00";}
+function localEvents(){
+  return LOCAL.map(function(r,i){
+    var ev={id:"local-"+i,oficial:r[0]==="o",d:r[1],e:r[2]||r[1],t:r[3],title:r[4],place:r[5],desc:r[6]};
+    if(!r[3]) ev.allday=true;
+    else{ev.startMs=Date.parse(r[1]+"T"+r[3]+":00"+madridOffset(r[1]));ev.endMs=ev.startMs+3600000;}
     return ev;
-  });
+  }).sort(function(a,b){return (a.d+(a.t||"")).localeCompare(b.d+(b.t||""));});
 }
 
 /* Actes de Google Calendar */
@@ -591,7 +604,7 @@ function fromGoogle(it,i){
 }
 var CS={mode:"loading",events:[]};
 function loadCalendar(){
-  if(!CAL.id){CS={mode:"demo",events:demoEvents()};afterLoad();return;}
+  if(!CAL.id){CS={mode:"local",events:localEvents()};afterLoad();return;}
   if(!CAL.key){CS={mode:"nokey",events:[]};afterLoad();return;}
   CS={mode:"loading",events:[]};afterLoad();
   var first=TODAY.slice(0,7)+"-01",p=p3(first);
@@ -670,7 +683,7 @@ function renderList(){
     var a=p3(ev.d),b=p3(ev.e),multi=ev.e!==ev.d;
     var when=ev.allday?(multi?rangeText(ev):t("allday")):(ev.t+(multi?" · "+rangeText(ev):""));
     var place=L(ev.place)||"",desc=L(ev.desc)||"";
-    var meta=esc(when)+(place?' · <a href="https://www.google.com/maps/search/?api=1&amp;query='+encodeURIComponent(place)+'" target="_blank" rel="noopener">'+esc(place)+'</a>':'');
+    var meta=esc(when)+(place?' · <a href="https://www.google.com/maps/search/?api=1&amp;query='+encodeURIComponent(/muro/i.test(place)?place:place+", Muro d'Alcoi")+'" target="_blank" rel="noopener">'+esc(place)+'</a>':'');
     html+='<li class="ev '+(ev.oficial?'o':'f')+(evPast(ev)?' past':'')+'" id="ev-'+i+'">'+
       '<div class="ev-date"><b'+(multi?' class="range"':'')+'>'+a[2]+(multi?'–'+b[2]:'')+'</b><span>'+esc(WDS[lang][dow(ev.d)])+'</span></div>'+
       '<div>'+(ev.oficial?'<span class="chip">'+esc(t("chip_of"))+'</span>':'')+
@@ -680,7 +693,6 @@ function renderList(){
   box.innerHTML=html;
 }
 function renderCalendar(){
-  document.getElementById("cal-demo").hidden=CS.mode!=="demo";
   MAP=dayMap();
   renderMini();
   renderList();
