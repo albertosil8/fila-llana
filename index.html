@@ -68,11 +68,95 @@ button{font:inherit;color:inherit}
 .lang button{border:0;background:transparent;padding:5px 11px;font-weight:700;font-size:.875rem;cursor:pointer;min-width:42px}
 .lang button[aria-pressed="true"]{background:var(--black);color:#fff}
 .menu-btn{display:none;border:0;background:transparent;padding:8px;cursor:pointer;flex:none}
-@media (max-width:860px){
+.nav{align-items:center}
+.nav a.nav-login{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--black);border-radius:999px;padding:5px 14px;margin-left:8px}
+.nav a.nav-login:hover{background:var(--tint)}
+.nav a.nav-login[aria-current="page"]{background:var(--black);color:#fff;box-shadow:none;border-radius:999px}
+@media (max-width:1040px){
   .menu-btn{display:block}
-  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;background:var(--paper);border-bottom:1px solid var(--line);padding:8px var(--gutter) 16px}
+  .nav{display:none;position:absolute;left:0;right:0;top:100%;flex-direction:column;align-items:stretch;background:var(--paper);border-bottom:1px solid var(--line);padding:8px var(--gutter) 16px}
   .nav.open{display:flex}
   .nav a{padding:12px 8px;font-size:1.125rem}
+  .nav a.nav-login{margin:10px 0 0;align-self:flex-start;padding:8px 18px}
+}
+
+/* ── Accés i perfil (prova) ── */
+.auth{max-width:520px}
+.acard{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.atabs{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line)}
+.atabs button{border:0;background:var(--tint);padding:14px;font-weight:700;cursor:pointer;font-size:1rem}
+.atabs button[aria-selected="true"]{background:var(--paper);box-shadow:inset 0 -3px 0 var(--red);color:var(--red)}
+.abody{padding:22px 24px 24px}
+.alead{margin:0 0 18px;color:var(--muted);font-size:1rem;line-height:1.5}
+.field{margin:0 0 16px}
+.field>label{display:block;font-weight:700;margin:0 0 6px}
+.ferr{color:#B3140B;font-weight:700;font-size:.9375rem;margin:6px 0 0}
+.inp[aria-invalid="true"]{border-color:#B3140B}
+.chk{display:flex;gap:10px;align-items:flex-start;font-size:.9375rem;line-height:1.45;cursor:pointer}
+.chk input{width:20px;height:20px;margin:1px 0 0;accent-color:var(--red);flex:none}
+.wide{width:100%}
+.aor{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.875rem;margin:18px 0}
+.aor::before,.aor::after{content:"";flex:1;height:1px;background:var(--line)}
+.btn.btn-white{background:#fff;border-color:#CFC3C0;color:var(--ink)}
+.btn.btn-white:hover{border-color:var(--black)}
+.aquick{display:block;margin:14px auto 0}
+.sent{text-align:center;padding:12px 0 4px}
+.sent svg{color:var(--red);margin:0 auto 8px}
+.sent h3{margin:0 0 6px;font-size:1.3rem}
+.sent p{margin:0 auto 18px;color:var(--muted);max-width:40ch;overflow-wrap:anywhere}
+.pf-head{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 24px}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-family:var(--display);font-weight:900;font-size:1.8rem;flex:none}
+.pf-head h3{margin:0;font-size:1.5rem;line-height:1.2}
+.pf-head p{margin:2px 0 0;color:var(--muted);font-size:.9688rem;overflow-wrap:anywhere}
+.pf-head .btn{margin-left:auto;min-height:42px;padding:8px 16px}
+.pf-grid{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:20px;margin:0 0 20px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:0 0 20px}
+.pf-grid .card{margin:0}
+.card h3{margin:0 0 14px;font-size:1.25rem}
+.kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 14px}
+.kpi span{display:block;font-size:.875rem;color:var(--muted);font-weight:700}
+.kpi b{display:block;font-family:var(--display);font-weight:900;font-size:2.3rem;line-height:1.05;font-variant-numeric:tabular-nums}
+.meter{height:10px;border-radius:5px;background:var(--line);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--black);border-radius:5px}
+.meter-l{margin:6px 0 0;font-size:.875rem;color:var(--muted)}
+.alert{display:flex;gap:10px;align-items:flex-start;margin:16px 0 0;padding:12px 14px;border-radius:10px;background:#FDE7E5;color:#8A140C;font-weight:700;font-size:.9375rem;line-height:1.45}
+.alert svg{flex:none;margin-top:1px}
+.alert.ok{background:#E3F2E6;color:#1E5E2C}
+.card p.small{margin:0;color:var(--muted);font-size:.9375rem;line-height:1.5}
+.concept{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:var(--tint);border-radius:10px;padding:10px 12px 10px 14px;margin:12px 0 14px}
+.concept span{font-size:.8125rem;color:var(--muted);font-weight:700;width:100%}
+.concept code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.125rem;font-weight:700}
+.concept .btn{min-height:36px;padding:4px 12px;margin-left:auto;font-size:.875rem}
+.kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 14px;margin:0;font-size:.9375rem}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-weight:700}
+table.pays{width:100%;border-collapse:collapse;font-size:1rem}
+.pays th{text-align:left;font-size:.8125rem;color:var(--muted);font-weight:700;padding:0 10px 8px;border-bottom:2px solid var(--black)}
+.pays td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.pays .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pays small{display:block;color:var(--muted);font-size:.8125rem;margin-top:4px}
+.state{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.875rem;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.state.paid{background:#E3F2E6;color:#1E5E2C}
+.state.pending{background:#EFE9E7;color:#4A4240}
+.state.late{background:#FDE7E5;color:#8A140C}
+.note{margin:12px 0 0;color:var(--muted);font-size:.9375rem}
+.acc{display:grid;grid-template-columns:1fr 1fr;gap:12px 28px}
+.acc h4{margin:0 0 4px;font-size:1rem}
+.acc ul{list-style:none;margin:0;padding:0}
+.acc li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--line);font-size:.9688rem}
+.acc li b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.acc li.tot{border-bottom:0;border-top:2px solid var(--black);font-weight:700}
+@media (max-width:760px){.pf-grid{grid-template-columns:1fr}.acc{grid-template-columns:1fr}.kpi b{font-size:1.9rem}}
+@media (max-width:560px){
+  .abody{padding:18px}
+  .pf-head .btn{margin-left:0}
+  table.pays thead{display:none}
+  table.pays,.pays tbody{display:block;width:100%}
+  .pays tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .pays td{border:0;padding:0}
+  .pays td.pd{color:var(--muted);font-size:.9375rem}
+  .pays td.pd::before{content:attr(data-l) ": "}
+  .pays td.ps{text-align:right}
 }
 
 /* ── Portada ── */
@@ -286,6 +370,7 @@ footer .f-brand{display:flex;align-items:center;gap:12px}
       <a href="#galeria" data-i18n="nav_gal">Galeria</a>
       <a href="#inscripcions" data-i18n="nav_form">Inscripcions</a>
       <a href="#contacte" data-i18n="nav_contact">Contacte</a>
+      <a href="#perfil" class="nav-login" id="nav-login"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 12a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9Zm0 2c-3.67 0-8 1.84-8 5v2h16v-2c0-3.16-4.33-5-8-5Z"/></svg><span id="nav-login-t">Entra</span></a>
     </nav>
     <div class="lang" role="group" aria-label="Idioma">
       <button type="button" data-lang="va" aria-pressed="true" lang="ca-ES-valencia">VA</button>
@@ -410,6 +495,14 @@ footer .f-brand{display:flex;align-items:center;gap:12px}
   </div>
 </section>
 
+<section class="block tinted fill" data-page="perfil" aria-labelledby="h-perfil">
+  <div class="wrap">
+    <h2 id="h-perfil" tabindex="-1">Entra</h2>
+    <p class="demo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg><span data-i18n="pf_demo">Mode de prova: pots posar qualsevol nom i correu. No es guarda res i els pagaments són inventats.</span></p>
+    <div id="perfil-box"></div>
+  </div>
+</section>
+
 <section class="block contact fill" data-page="contacte" aria-labelledby="h-contact">
   <div class="wrap">
     <h2 id="h-contact" data-i18n="contact_h" tabindex="-1">Contacte</h2>
@@ -463,7 +556,28 @@ var T={
   f_req:"Aquesta pregunta és obligatòria",f_next:"Següent",f_back:"Enrere",f_send:"Envia",f_clear:"Esborra el formulari",f_choose:"Tria",
   f_file:"Afegeix una foto",f_file_change:"Canvia la foto",f_file_big:"La foto ocupa més de 10 MB. Tria'n una més menuda.",f_file_type:"Ha de ser una imatge.",
   f_done:"Moltes gràcies! Hem rebut la teua resposta.",f_demo_done:"Mode de prova: no s'ha enviat res.",f_sum:"Això és el que rebria la junta:",f_again:"Envia una altra resposta",
-  f_step:"Pas",f_confirm_clear:"Vols esborrar totes les respostes?"
+  f_step:"Pas",f_confirm_clear:"Vols esborrar totes les respostes?",
+  nav_login:"Entra",nav_profile:"El meu perfil",pf_h_in:"Entra",pf_h:"El meu perfil",
+  pf_demo:"Mode de prova: pots posar qualsevol nom i correu. No es guarda res i els pagaments són inventats.",
+  au_tab_in:"Entra",au_tab_up:"Registra't",
+  au_lead_in:"Entra amb el correu que tens donat a la filà. T'enviarem un enllaç i no cal recordar cap contrasenya.",
+  au_lead_up:"Crea el teu compte de fester. Només s'hi poden registrar els festers que estan en la llista de la filà.",
+  au_name:"Nom i cognoms",au_mail:"Correu electrònic",
+  au_consent:"Accepte que la Filà Llana use les meues dades només per a gestionar la meua fitxa de fester.",
+  au_send:"Envia'm l'enllaç",au_create:"Crea el compte",au_google:"Entra amb Google",au_or:"o",au_quick:"Veure un perfil de prova",
+  au_err_name:"Escriu el teu nom i cognoms.",au_err_mail:"Escriu un correu vàlid (per exemple, nom@gmail.com).",au_err_consent:"Has d'acceptar-ho per a crear el compte.",
+  au_sent_h:"Mira el correu",au_sent_p:"T'hem enviat un enllaç a {m}. Obri'l des del mòbil o l'ordinador i entraràs directament.",
+  au_open:"Obri l'enllaç (prova)",au_back:"Torna",demo_name:"Fester de prova",
+  pf_role:"Fester",pf_code:"codi",pf_out:"Ix",
+  pf_season:"Temporada 2026-2027",pf_paid:"Pagat",pf_left:"Et falta",pf_total:"Total de l'any",
+  pf_meter:"Has pagat {a} de {b}.",pf_late:"Tens un pagament fora de termini: {c} ({a}), que vencia {d}.",pf_ok:"Ho tens tot al dia.",
+  pf_how_h:"Com pague?",pf_how_p:"Fes una transferència o un Bizum a la filà i posa sempre aquest concepte. Així sabem que el pagament és teu.",
+  pf_concept:"Concepte per al pròxim pagament",pf_copy:"Copia",pf_copied:"Copiat",pf_iban:"Compte (IBAN)",pf_iban_ph:"[IBAN de la filà]",pf_bizum_ph:"[número de Bizum]",
+  pf_pays_h:"Els meus pagaments",th_concept:"Concepte",th_amount:"Import",th_due:"Termini",th_state:"Estat",
+  st_paid:"Pagat",st_pending:"Pendent",st_late:"Fora de termini",paid_on:"Pagat {d}",via_transfer:"transferència",via_cash:"en efectiu",via_bizum:"Bizum",
+  pf_remind:"Et recordarem per correu uns dies abans de cada termini.",
+  pf_acc_h:"Comptes de la filà",pf_acc_p:"Temporada 2026-2027. Els porta la tresoreria i els veuen tots els festers; els pagaments de cadascú només els veu ell.",
+  acc_in:"Ingressos",acc_out:"Despeses",acc_bal:"Saldo",acc_tot:"Total"
  },
  es:{skip:"Saltar al contenido",nav_home:"Inicio",nav_cal:"Calendario",nav_gal:"Galería",nav_form:"Inscripciones",nav_contact:"Contacto",menu:"Menú",
   shield_alt:"Escudo de la Filà Llana",tagline:"Moros y Cristianos de Muro de Alcoy",next_lbl:"Próximo acto",next_btn:"Ver todo el calendario",
@@ -493,7 +607,28 @@ var T={
   f_req:"Esta pregunta es obligatoria",f_next:"Siguiente",f_back:"Atrás",f_send:"Enviar",f_clear:"Borrar el formulario",f_choose:"Elige",
   f_file:"Añadir una foto",f_file_change:"Cambiar la foto",f_file_big:"La foto ocupa más de 10 MB. Elige una más pequeña.",f_file_type:"Tiene que ser una imagen.",
   f_done:"¡Muchas gracias! Hemos recibido tu respuesta.",f_demo_done:"Modo de prueba: no se ha enviado nada.",f_sum:"Esto es lo que recibiría la junta:",f_again:"Enviar otra respuesta",
-  f_step:"Paso",f_confirm_clear:"¿Quieres borrar todas las respuestas?"
+  f_step:"Paso",f_confirm_clear:"¿Quieres borrar todas las respuestas?",
+  nav_login:"Entrar",nav_profile:"Mi perfil",pf_h_in:"Entrar",pf_h:"Mi perfil",
+  pf_demo:"Modo de prueba: puedes poner cualquier nombre y correo. No se guarda nada y los pagos son inventados.",
+  au_tab_in:"Entrar",au_tab_up:"Registrarse",
+  au_lead_in:"Entra con el correo que diste a la filà. Te enviaremos un enlace y no hace falta recordar ninguna contraseña.",
+  au_lead_up:"Crea tu cuenta de festero. Solo pueden registrarse los festeros que están en la lista de la filà.",
+  au_name:"Nombre y apellidos",au_mail:"Correo electrónico",
+  au_consent:"Acepto que la Filà Llana use mis datos solo para gestionar mi ficha de festero.",
+  au_send:"Envíame el enlace",au_create:"Crear la cuenta",au_google:"Entrar con Google",au_or:"o",au_quick:"Ver un perfil de prueba",
+  au_err_name:"Escribe tu nombre y apellidos.",au_err_mail:"Escribe un correo válido (por ejemplo, nombre@gmail.com).",au_err_consent:"Tienes que aceptarlo para crear la cuenta.",
+  au_sent_h:"Mira el correo",au_sent_p:"Te hemos enviado un enlace a {m}. Ábrelo desde el móvil o el ordenador y entrarás directamente.",
+  au_open:"Abrir el enlace (prueba)",au_back:"Volver",demo_name:"Festero de prueba",
+  pf_role:"Festero",pf_code:"código",pf_out:"Salir",
+  pf_season:"Temporada 2026-2027",pf_paid:"Pagado",pf_left:"Te falta",pf_total:"Total del año",
+  pf_meter:"Has pagado {a} de {b}.",pf_late:"Tienes un pago fuera de plazo: {c} ({a}), que vencía {d}.",pf_ok:"Lo tienes todo al día.",
+  pf_how_h:"¿Cómo pago?",pf_how_p:"Haz una transferencia o un Bizum a la filà y pon siempre este concepto. Así sabemos que el pago es tuyo.",
+  pf_concept:"Concepto para el próximo pago",pf_copy:"Copiar",pf_copied:"Copiado",pf_iban:"Cuenta (IBAN)",pf_iban_ph:"[IBAN de la filà]",pf_bizum_ph:"[número de Bizum]",
+  pf_pays_h:"Mis pagos",th_concept:"Concepto",th_amount:"Importe",th_due:"Plazo",th_state:"Estado",
+  st_paid:"Pagado",st_pending:"Pendiente",st_late:"Fuera de plazo",paid_on:"Pagado {d}",via_transfer:"transferencia",via_cash:"en efectivo",via_bizum:"Bizum",
+  pf_remind:"Te lo recordaremos por correo unos días antes de cada plazo.",
+  pf_acc_h:"Cuentas de la filà",pf_acc_p:"Temporada 2026-2027. Las lleva la tesorería y las ven todos los festeros; los pagos de cada uno solo los ve él.",
+  acc_in:"Ingresos",acc_out:"Gastos",acc_bal:"Saldo",acc_tot:"Total"
  }
 };
 var lang="va";
@@ -927,6 +1062,161 @@ formEl.addEventListener("click",function(e){
 });
 function resetForm(){Object.keys(F.files).forEach(function(k){if(F.files[k])URL.revokeObjectURL(F.files[k].url);});F.cur="inici";F.hist=[];F.ans={};F.files={};F.done=false;}
 
+/* ═══ Accés i perfil (MODE DE PROVA: no es guarda res i les dades són inventades) ═══ */
+var USER=null,AUTH={tab:"in",step:"form",name:"",mail:"",consent:false,errs:{}};
+try{var su=JSON.parse(sessionStorage.getItem("fila-demo-user")||"null");if(su&&(su.name||su.demo))USER=su;}catch(e){}
+function saveUser(){try{if(USER)sessionStorage.setItem("fila-demo-user",JSON.stringify(USER));else sessionStorage.removeItem("fila-demo-user");}catch(e){}}
+var PCODE="LL045";
+var PAYS=[
+ {c:{va:"Quota 1",es:"Cuota 1"},a:80,due:"2026-09-15",paid:"2026-09-10",via:"transfer"},
+ {c:{va:"Loteria de Nadal",es:"Lotería de Navidad"},a:20,due:"2026-10-31",paid:"2026-10-28",via:"cash"},
+ {c:{va:"Quota 2",es:"Cuota 2"},a:80,due:"2026-11-01"},
+ {c:{va:"Quota 3",es:"Cuota 3"},a:80,due:"2027-01-15"},
+ {c:{va:"Quota 4",es:"Cuota 4"},a:80,due:"2027-03-15"}
+];
+var ACC_IN=[[{va:"Quotes",es:"Cuotas"},9600],[{va:"Loteria de Nadal",es:"Lotería de Navidad"},2150],[{va:"Subvenció de l'Ajuntament",es:"Subvención del Ayuntamiento"},1200],[{va:"Rifes i ruleta",es:"Rifas y ruleta"},850]];
+var ACC_OUT=[[{va:"Bandes de música",es:"Bandas de música"},6400],[{va:"Boato",es:"Boato"},2300],[{va:"Local (lloguer i llum)",es:"Local (alquiler y luz)"},1150],[{va:"Sopars i esmorzars",es:"Cenas y almuerzos"},1050]];
+var MAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+var ICO={
+ ok:'<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17Z"/></svg>',
+ clock:'<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16Zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7Z"/></svg>',
+ warn:'<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 15h-2v-2h2v2Zm0-4h-2V7h2v6Z"/></svg>',
+ mail:'<svg width="48" height="48" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/></svg>'
+};
+function eur(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,".")+" €";}
+function dateTxt(s){var p=p3(s);return p[2]+" "+deM(p[1])+(p[0]!==+TODAY.slice(0,4)?" de "+p[0]:"");}
+function withArt(s){var d=p3(s)[2];return (lang==="va"&&(d===1||d===11)?"l'":"el ")+dateTxt(s);}
+function fill(k,o){return t(k).replace(/\{(\w)\}/g,function(_,x){return o[x]!=null?o[x]:"";});}
+function initials(n){var w=String(n).trim().split(/\s+/).filter(Boolean);return ((w[0]||"?").charAt(0)+(w.length>1?w[w.length-1].charAt(0):"")).toUpperCase();}
+function userName(){return USER.demo?t("demo_name"):USER.name;}
+var pfBox=document.getElementById("perfil-box"),pfH=document.getElementById("h-perfil");
+
+function readForm(){
+  var n=document.getElementById("au-name"),m=document.getElementById("au-mail"),c=document.getElementById("au-consent");
+  if(n)AUTH.name=n.value;if(m)AUTH.mail=m.value;if(c)AUTH.consent=c.checked;
+}
+function field(id,k,type,val,ac,err){
+  return '<div class="field"><label for="'+id+'">'+esc(t(k))+'</label><input class="inp" id="'+id+'" type="'+type+'" autocomplete="'+ac+'" value="'+esc(val)+'"'+
+    (err?' aria-invalid="true" aria-describedby="'+id+'-e"':'')+'>'+(err?'<p class="ferr" id="'+id+'-e">'+esc(t(err))+'</p>':'')+'</div>';
+}
+function authHTML(){
+  var A=AUTH,up=A.tab==="up",h='<div class="auth"><div class="acard">';
+  if(A.step==="sent"){
+    return h+'<div class="abody sent">'+ICO.mail+'<h3>'+esc(t("au_sent_h"))+'</h3><p>'+esc(fill("au_sent_p",{m:A.mail}))+'</p>'+
+      '<button type="button" class="btn btn-red wide" data-pf="open">'+esc(t("au_open"))+'</button>'+
+      '<button type="button" class="linkish aquick" data-pf="back">'+esc(t("au_back"))+'</button></div></div></div>';
+  }
+  h+='<div class="atabs" role="tablist">'+
+    '<button type="button" role="tab" aria-selected="'+(!up)+'" data-pf="tab-in">'+esc(t("au_tab_in"))+'</button>'+
+    '<button type="button" role="tab" aria-selected="'+up+'" data-pf="tab-up">'+esc(t("au_tab_up"))+'</button></div>';
+  h+='<form class="abody" id="au-form" novalidate><p class="alead">'+esc(t(up?"au_lead_up":"au_lead_in"))+'</p>';
+  if(up) h+=field("au-name","au_name","text",A.name,"name",A.errs.name);
+  h+=field("au-mail","au_mail","email",A.mail,"email",A.errs.mail);
+  if(up){
+    h+='<div class="field"><label class="chk"><input type="checkbox" id="au-consent"'+(A.consent?' checked':'')+
+      (A.errs.consent?' aria-invalid="true" aria-describedby="au-consent-e"':'')+'><span>'+esc(t("au_consent"))+'</span></label>'+
+      (A.errs.consent?'<p class="ferr" id="au-consent-e">'+esc(t(A.errs.consent))+'</p>':'')+'</div>';
+  }
+  h+='<button type="submit" class="btn btn-red wide">'+esc(t(up?"au_create":"au_send"))+'</button>'+
+    '<div class="aor">'+esc(t("au_or"))+'</div>'+
+    '<button type="button" class="btn btn-white wide" data-pf="google">'+esc(t("au_google"))+'</button>'+
+    '<button type="button" class="linkish aquick" data-pf="quick">'+esc(t("au_quick"))+'</button></form></div></div>';
+  return h;
+}
+function kpi(k,v){return '<div class="kpi"><span>'+esc(t(k))+'</span><b>'+v+'</b></div>';}
+function accList(k,rows,tot){
+  var h='<div><h4>'+esc(t(k))+'</h4><ul>';
+  rows.forEach(function(r){h+='<li><span>'+esc(L(r[0]))+'</span><b>'+eur(r[1])+'</b></li>';});
+  return h+'<li class="tot"><span>'+esc(t("acc_tot"))+'</span><b>'+eur(tot)+'</b></li></ul></div>';
+}
+function profileHTML(){
+  var paid=0,total=0,late=null,next=null;
+  PAYS.forEach(function(p){total+=p.a;if(p.paid)paid+=p.a;else{if(!next)next=p;if(!late&&p.due<TODAY)late=p;}});
+  var pct=Math.round(paid/total*100),nm=userName(),meter=fill("pf_meter",{a:eur(paid),b:eur(total)});
+  var h='<div class="pf-head"><div class="avatar" aria-hidden="true">'+esc(initials(nm))+'</div><div><h3>'+esc(nm)+'</h3>'+
+    '<p>'+esc(t("pf_role"))+' · '+esc(t("pf_code"))+' '+PCODE+(USER.mail?' · '+esc(USER.mail):'')+'</p></div>'+
+    '<button type="button" class="btn btn-line" data-pf="out">'+esc(t("pf_out"))+'</button></div>';
+  h+='<div class="pf-grid"><section class="card"><h3>'+esc(t("pf_season"))+'</h3>'+
+    '<div class="kpis">'+kpi("pf_paid",eur(paid))+kpi("pf_left",eur(total-paid))+kpi("pf_total",eur(total))+'</div>'+
+    '<div class="meter" role="img" aria-label="'+esc(meter)+'"><i style="width:'+pct+'%"></i></div><p class="meter-l" aria-hidden="true">'+esc(meter)+'</p>'+
+    (late?'<p class="alert">'+ICO.warn+'<span>'+esc(fill("pf_late",{c:L(late.c),a:eur(late.a),d:withArt(late.due)}))+'</span></p>'
+         :'<p class="alert ok">'+ICO.ok+'<span>'+esc(t("pf_ok"))+'</span></p>')+'</section>';
+  h+='<section class="card"><h3>'+esc(t("pf_how_h"))+'</h3><p class="small">'+esc(t("pf_how_p"))+'</p>'+
+    '<div class="concept"><span>'+esc(t("pf_concept"))+'</span><code id="pf-concept">'+esc(PCODE+(next?" "+L(next.c):""))+'</code>'+
+    '<button type="button" class="btn btn-line" data-pf="copy">'+esc(t("pf_copy"))+'</button></div>'+
+    '<dl class="kv"><dt>'+esc(t("pf_iban"))+'</dt><dd><span class="ph">'+esc(t("pf_iban_ph"))+'</span></dd>'+
+    '<dt>Bizum</dt><dd><span class="ph">'+esc(t("pf_bizum_ph"))+'</span></dd></dl></section></div>';
+  h+='<section class="card"><h3>'+esc(t("pf_pays_h"))+'</h3><table class="pays"><thead><tr>'+
+    '<th scope="col">'+esc(t("th_concept"))+'</th><th scope="col" class="num">'+esc(t("th_amount"))+'</th>'+
+    '<th scope="col">'+esc(t("th_due"))+'</th><th scope="col">'+esc(t("th_state"))+'</th></tr></thead><tbody>';
+  PAYS.forEach(function(p){
+    var st=p.paid?"paid":(p.due<TODAY?"late":"pending");
+    var chip='<span class="state '+st+'">'+(st==="paid"?ICO.ok:st==="late"?ICO.warn:ICO.clock)+esc(t("st_"+st))+'</span>';
+    var sub=p.paid?'<small>'+esc(fill("paid_on",{d:withArt(p.paid)}))+' · '+esc(t("via_"+p.via))+'</small>':'';
+    h+='<tr><td class="pc"><b>'+esc(L(p.c))+'</b>'+sub+'</td><td class="num pa">'+eur(p.a)+'</td>'+
+      '<td class="pd" data-l="'+esc(t("th_due"))+'">'+esc(dateTxt(p.due))+'</td><td class="ps">'+chip+'</td></tr>';
+  });
+  h+='</tbody></table><p class="note">'+esc(t("pf_remind"))+'</p></section>';
+  var tin=0,tout=0;
+  ACC_IN.forEach(function(r){tin+=r[1];});ACC_OUT.forEach(function(r){tout+=r[1];});
+  h+='<section class="card"><h3>'+esc(t("pf_acc_h"))+'</h3><p class="small" style="margin:0 0 14px">'+esc(t("pf_acc_p"))+'</p>'+
+    '<div class="kpis">'+kpi("acc_in",eur(tin))+kpi("acc_out",eur(tout))+kpi("acc_bal",eur(tin-tout))+'</div>'+
+    '<div class="acc">'+accList("acc_in",ACC_IN,tin)+accList("acc_out",ACC_OUT,tout)+'</div></section>';
+  return h;
+}
+function renderPerfil(){
+  if(!USER&&AUTH.step==="form") readForm();
+  document.getElementById("nav-login-t").textContent=USER?t("nav_profile"):t("nav_login");
+  pfH.textContent=USER?t("pf_h"):t("pf_h_in");
+  pfBox.innerHTML=USER?profileHTML():authHTML();
+  if(page==="perfil") setTitle();
+}
+function focusTop(){
+  try{window.scrollTo({top:0,left:0,behavior:"instant"});}catch(e){window.scrollTo(0,0);}
+  pfH.focus({preventScroll:true});
+}
+function login(u){USER=u;saveUser();renderPerfil();focusTop();}
+function nameFromMail(m){
+  var s=String(m).split("@")[0].replace(/[._\-0-9]+/g," ").trim();
+  return s?s.split(/\s+/).map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(" "):"";
+}
+pfBox.addEventListener("click",function(e){
+  var b=e.target.closest("[data-pf]");if(!b)return;
+  var a=b.getAttribute("data-pf");
+  if(a==="tab-in"||a==="tab-up"){
+    readForm();AUTH.tab=a==="tab-up"?"up":"in";AUTH.errs={};renderPerfil();
+    var f=document.getElementById(AUTH.tab==="up"?"au-name":"au-mail");if(f)f.focus();
+  }else if(a==="google"||a==="quick"){
+    login({demo:true,name:"",mail:""});
+  }else if(a==="open"){
+    var nm=AUTH.name.trim()||nameFromMail(AUTH.mail);
+    login(nm?{name:nm,mail:AUTH.mail}:{demo:true,name:"",mail:AUTH.mail});
+  }else if(a==="back"){
+    AUTH.step="form";renderPerfil();
+  }else if(a==="out"){
+    USER=null;AUTH={tab:"in",step:"form",name:"",mail:"",consent:false,errs:{}};saveUser();renderPerfil();focusTop();
+  }else if(a==="copy"){
+    var txt=document.getElementById("pf-concept").textContent;
+    var done=function(){b.textContent=t("pf_copied");setTimeout(function(){b.textContent=t("pf_copy");},1800);};
+    if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done,function(){});
+  }
+});
+pfBox.addEventListener("submit",function(e){
+  e.preventDefault();readForm();
+  var A=AUTH,errs={};
+  if(A.tab==="up"&&!A.name.trim()) errs.name="au_err_name";
+  if(!MAIL_RE.test(A.mail.trim())) errs.mail="au_err_mail";
+  if(A.tab==="up"&&!A.consent) errs.consent="au_err_consent";
+  A.errs=errs;
+  if(Object.keys(errs).length){
+    renderPerfil();
+    var first=pfBox.querySelector('[aria-invalid="true"]');if(first)first.focus();
+    return;
+  }
+  A.name=A.name.trim();A.mail=A.mail.trim();A.step="sent";renderPerfil();
+  var bt=pfBox.querySelector('[data-pf="open"]');if(bt)bt.focus();
+});
+
 /* ═══ Idioma ═══ */
 function applyLang(){
   document.documentElement.lang=lang==="va"?"ca-ES-valencia":"es";
@@ -935,14 +1225,14 @@ function applyLang(){
   Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-alt]"),function(el){el.alt=t(el.getAttribute("data-i18n-alt"));});
   Array.prototype.forEach.call(document.querySelectorAll(".lang button"),function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-lang")===lang));});
   setTitle();
-  renderCalendar();renderNext();renderGallery();renderForm(false);
+  renderCalendar();renderNext();renderGallery();renderForm(false);renderPerfil();
 }
 
 /* ═══ Pàgines ═══ */
-var PAGES=["inici","calendari","galeria","inscripcions","contacte"],NAVK={calendari:"nav_cal",galeria:"nav_gal",inscripcions:"nav_form",contacte:"nav_contact"},page=null;
+var PAGES=["inici","calendari","galeria","inscripcions","contacte","perfil"],NAVK={calendari:"nav_cal",galeria:"nav_gal",inscripcions:"nav_form",contacte:"nav_contact"},page=null;
 function setTitle(){
   var base=lang==="va"?"Filà Llana · Muro d'Alcoi":"Filà Llana · Muro de Alcoy";
-  document.title=(page&&page!=="inici")?t(NAVK[page])+" · Filà Llana":base;
+  document.title=(page&&page!=="inici")?(page==="perfil"?t(USER?"nav_profile":"nav_login"):t(NAVK[page]))+" · Filà Llana":base;
 }
 function route(first){
   var h=(location.hash||"").replace(/^#\/?/,"");
