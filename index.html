@@ -49,6 +49,10 @@ button{font:inherit;color:inherit}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .skip{position:absolute;left:12px;top:-60px;background:var(--black);color:#fff;padding:10px 14px;z-index:50;text-decoration:none}
 .skip:focus{top:12px}
+[hidden]{display:none!important}
+[tabindex="-1"]:focus{outline:none}
+.fill{min-height:calc(100vh - 151px)}
+@supports (min-height:100svh){.fill{min-height:calc(100svh - 151px)}}
 
 /* ── Capçalera ── */
 .top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
@@ -59,6 +63,7 @@ button{font:inherit;color:inherit}
 .nav{display:flex;gap:4px}
 .nav a{text-decoration:none;font-weight:700;padding:8px 12px;border-radius:6px}
 .nav a:hover{background:var(--tint)}
+.nav a[aria-current="page"]{color:var(--red);box-shadow:inset 0 -3px 0 var(--red);border-radius:6px 6px 0 0}
 .lang{display:flex;border:2px solid var(--black);border-radius:999px;overflow:hidden;flex:none}
 .lang button{border:0;background:transparent;padding:5px 11px;font-weight:700;font-size:.875rem;cursor:pointer;min-width:42px}
 .lang button[aria-pressed="true"]{background:var(--black);color:#fff}
@@ -121,25 +126,69 @@ section.block{padding:72px 0}
 .jump a:hover{color:var(--red)}
 @media (max-width:760px){.about{grid-template-columns:1fr;gap:28px}}
 
-/* Calendari */
-.cal-tools{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 32px}
+/* Calendari: subscripció */
+.sub{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px 28px;align-items:center;background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--red);border-radius:14px;padding:20px 22px;margin:0 0 32px}
+.sub h3{margin:0;font-size:1.25rem;line-height:1.25}
+.sub-txt p{margin:4px 0 0;color:var(--muted);font-size:1rem;line-height:1.45;max-width:58ch}
+.sub-btns{display:flex;flex-wrap:wrap;gap:10px}
+.sub-btns .btn{min-height:44px;padding:8px 16px}
+.btn.off{opacity:.45;cursor:not-allowed}
+.btn.off:hover{background:transparent}
+.sub-off,.sub-msg{grid-column:1/-1;margin:0;font-size:.9375rem;color:var(--muted);overflow-wrap:anywhere}
+.sub-msg:empty{display:none}
+.sub-msg code{font-size:.875rem;background:var(--tint);padding:2px 6px;border-radius:4px;color:var(--ink)}
+.how{grid-column:1/-1;font-size:.9375rem;line-height:1.5;border-top:1px solid var(--line);padding-top:10px}
+.how summary{cursor:pointer;font-weight:700;color:var(--red-deep);width:max-content;max-width:100%}
+.how ul{margin:8px 0 2px;padding-left:18px}
+.how li{margin:0 0 6px}
+@media (max-width:760px){.sub{grid-template-columns:1fr;padding:18px}.sub-btns .btn{flex:1 1 auto}}
+
+/* Calendari: mes i llista */
+.cal-layout{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:40px;align-items:start}
+.mini{position:sticky;top:84px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 14px 16px}
+.mini-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:0 0 8px}
+.mini-head h3{margin:0;font-family:var(--display);font-weight:800;font-size:1.55rem;line-height:1;color:var(--red);text-align:center}
+.mini-nav{border:0;background:transparent;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;cursor:pointer;flex:none}
+.mini-nav:hover{background:var(--tint)}
+.mini-nav:disabled{opacity:.25;cursor:default;background:transparent}
+.mini-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px;text-align:center}
+.mini-grid .wd{font-size:.75rem;font-weight:700;color:var(--muted);padding:2px 0 6px}
+.d{position:relative;display:grid;place-items:center;aspect-ratio:1;min-height:36px;border-radius:10px;font-size:.9375rem;font-variant-numeric:tabular-nums;border:0;background:transparent;padding:0 0 6px;line-height:1;color:var(--ink)}
+.d.past{color:#A39A98}
+.d.today{box-shadow:inset 0 0 0 2px var(--black);font-weight:700}
+button.d{cursor:pointer;font-weight:700;background:var(--tint)}
+button.d:hover{background:#F6DCD7}
+button.d.past{color:#7D7371}
+button.d.sel{background:var(--black);color:#fff}
+.d .dots{position:absolute;left:0;right:0;bottom:6px;display:flex;justify-content:center;gap:3px}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;flex:none}
+.dot.f{background:var(--red)}
+.dot.o{background:var(--gold);box-shadow:inset 0 0 0 1px rgba(0,0,0,.4)}
+button.d.sel .dot{box-shadow:0 0 0 1.5px #fff}
+.legend{list-style:none;margin:12px 0 0;padding:12px 4px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:6px;font-size:.9375rem}
+.legend li{display:flex;align-items:center;gap:10px}
+.legend .dot{width:12px;height:12px}
 .month{font-family:var(--display);font-weight:800;font-size:1.6rem;margin:32px 0 10px;color:var(--red)}
-.month:first-of-type{margin-top:0}
+.cal-list>.month:first-child{margin-top:0}
 .events{list-style:none;margin:0;padding:0;border-top:2px solid var(--black)}
-.ev{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:18px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
-.ev-date{text-align:center;line-height:1}
+.ev{position:relative;display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;align-items:start;padding:16px 8px 16px 18px;border-bottom:1px solid var(--line);transition:background-color .6s ease}
+.ev::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:5px;border-radius:3px;background:var(--red)}
+.ev.o::before{background:var(--gold)}
+.ev-date{text-align:center;line-height:1;padding-top:2px}
 .ev-date b{display:block;font-family:var(--display);font-weight:900;font-size:2.6rem}
-.ev-date b.range{font-size:1.55rem;line-height:1.05}
-.ev-date span{display:block;font-weight:700;font-size:.8125rem;color:var(--muted);margin-top:4px;text-transform:capitalize}
-.ev h3{margin:0;font-size:1.1875rem;line-height:1.3}
-.ev p{margin:2px 0 0;color:var(--muted);font-size:.9688rem}
-.ev .btn{min-height:42px;padding:8px 14px;font-size:.9375rem}
+.ev-date b.range{font-size:1.5rem;line-height:1.05}
+.ev-date span{display:block;font-weight:700;font-size:.8125rem;color:var(--muted);margin-top:4px}
+.ev h4{margin:0;font-size:1.1875rem;line-height:1.3}
+.ev .meta{margin:2px 0 0;color:var(--muted);font-size:.9688rem}
+.ev .meta a{color:inherit;text-underline-offset:3px}
+.ev .desc{margin:6px 0 0;font-size:.9375rem;white-space:pre-line;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.chip{display:inline-block;background:var(--gold);color:var(--black);font-weight:700;font-size:.75rem;letter-spacing:.02em;padding:2px 9px;border-radius:999px;margin:0 0 5px}
 .ev.past{opacity:.5}
-@media (max-width:560px){
-  .ev{grid-template-columns:58px minmax(0,1fr);gap:4px 14px}
-  .ev .btn{grid-column:2;justify-self:start;margin-top:8px}
-  .ev-date b{font-size:2.2rem}
-}
+.ev.flash{background:#FFF1C9}
+.cal-note{margin:0;padding:22px 0;color:var(--muted);border-top:2px solid var(--black)}
+.cal-note a{color:var(--red-deep);font-weight:700}
+@media (max-width:860px){.cal-layout{grid-template-columns:1fr;gap:28px}.mini{position:static;width:100%;max-width:440px;margin:0 auto}}
+@media (max-width:560px){.ev{grid-template-columns:50px minmax(0,1fr);gap:4px 14px;padding-left:16px}.ev-date b{font-size:2.2rem}.ev-date b.range{font-size:1.3rem}}
 
 /* Galeria */
 .on-dark{background:var(--black);color:#fff}
@@ -232,6 +281,7 @@ footer .f-brand{display:flex;align-items:center;gap:12px}
   <div class="wrap">
     <a class="brand" href="#inici"><img src="img/escudo-sm.png" alt="" width="30" height="40"><span>Filà Llana</span></a>
     <nav class="nav" id="nav" aria-label="Menú">
+      <a href="#inici" data-i18n="nav_home">Inici</a>
       <a href="#calendari" data-i18n="nav_cal">Calendari</a>
       <a href="#galeria" data-i18n="nav_gal">Galeria</a>
       <a href="#inscripcions" data-i18n="nav_form">Inscripcions</a>
@@ -248,7 +298,7 @@ footer .f-brand{display:flex;align-items:center;gap:12px}
 </header>
 
 <main id="main">
-<section class="hero" id="inici">
+<section class="hero" data-page="inici">
   <div class="wrap">
     <img class="hero-shield" src="img/escudo.png" alt="Escut de la Filà Llana" data-i18n-alt="shield_alt" width="561" height="760">
     <div>
@@ -264,7 +314,7 @@ footer .f-brand{display:flex;align-items:center;gap:12px}
   </div>
 </section>
 
-<section class="block" id="la-fila" aria-labelledby="h-fila">
+<section class="block" data-page="inici" aria-labelledby="h-fila">
   <div class="wrap about">
     <div>
       <h2 id="h-fila" data-i18n="about_h">La filà</h2>
@@ -273,30 +323,70 @@ footer .f-brand{display:flex;align-items:center;gap:12px}
     </div>
     <div class="jump">
       <a href="#inscripcions"><div><span class="jt" data-i18n="j1_t">Vull apuntar-me</span><span class="js" data-i18n="j1_s">Alta, boato, convidats o propostes</span></div></a>
-      <a href="#calendari"><div><span class="jt" data-i18n="j2_t">Quan són els actes?</span><span class="js" data-i18n="j2_s">Descarrega el calendari al mòbil</span></div></a>
+      <a href="#calendari"><div><span class="jt" data-i18n="j2_t">Quan són els actes?</span><span class="js" data-i18n="j2_s">Afig el calendari al mòbil</span></div></a>
       <a href="#galeria"><div><span class="jt" data-i18n="j3_t">Veure les fotos</span><span class="js" data-i18n="j3_s">La filà en la festa</span></div></a>
     </div>
   </div>
 </section>
 
-<section class="block tinted" id="calendari" aria-labelledby="h-cal">
+<section class="block tinted fill" data-page="calendari" aria-labelledby="h-cal">
   <div class="wrap">
-    <h2 id="h-cal" data-i18n="cal_h">Calendari</h2>
-    <p class="lead" data-i18n="cal_lead">Tots els actes de la filà. Descarrega'ls i et sortiran al calendari del mòbil.</p>
-    <p class="demo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg><span data-i18n="cal_demo">Calendari de prova: les dates són d'exemple.</span></p>
-    <div class="cal-tools">
-      <button type="button" class="btn btn-red" id="dl-all">
-        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5 20h14v-2H5v2Zm7-2 6-6-1.41-1.41L13 14.17V3h-2v11.17l-3.59-3.58L6 12l6 6Z"/></svg>
-        <span data-i18n="cal_dl">Descarrega el calendari</span>
-      </button>
+    <h2 id="h-cal" data-i18n="cal_h" tabindex="-1">Calendari</h2>
+    <p class="lead" data-i18n="cal_lead">Els actes de la filà i els oficials de la Junta de Festes, tots en un calendari.</p>
+    <p class="demo" id="cal-demo" hidden><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg><span data-i18n="cal_demo">Calendari de prova: les dates són d'exemple.</span></p>
+
+    <div class="sub">
+      <div class="sub-txt">
+        <h3 data-i18n="sub_h">Tin el calendari al mòbil</h3>
+        <p data-i18n="sub_p">Subscriu-te una sola vegada: et sortiran tots els actes i, si en canviem algun, es canviarà sol.</p>
+      </div>
+      <div class="sub-btns">
+        <a class="btn btn-line" id="sub-ios" href="#">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H8a3 3 0 0 0-3 3v16a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V4a3 3 0 0 0-3-3Zm1 19a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16Zm-6-2h2v1.5h-2V18Z"/></svg>
+          <span>iPhone</span>
+        </a>
+        <a class="btn btn-line" id="sub-and" href="#" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16 1H8a3 3 0 0 0-3 3v16a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3V4a3 3 0 0 0-3-3Zm1 19a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16Zm-6-2h2v1.5h-2V18Z"/></svg>
+          <span>Android</span>
+        </a>
+        <button type="button" class="btn btn-line" id="sub-copy">
+          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M10.6 13.4a1 1 0 0 1 0-1.4l3.4-3.4a1 1 0 1 1 1.4 1.4L12 13.4a1 1 0 0 1-1.4 0Zm2.1 3.5-1.4 1.4a4 4 0 0 1-5.6-5.6l1.4-1.4a1 1 0 1 1 1.4 1.4l-1.4 1.4a2 2 0 0 0 2.8 2.8l1.4-1.4a1 1 0 0 1 1.4 1.4Zm-1.4-11.2 1.4-1.4a4 4 0 0 1 5.6 5.6l-1.4 1.4a1 1 0 1 1-1.4-1.4l1.4-1.4a2 2 0 0 0-2.8-2.8l-1.4 1.4a1 1 0 0 1-1.4-1.4Z"/></svg>
+          <span data-i18n="sub_copy">Copia l'enllaç</span>
+        </button>
+      </div>
+      <p class="sub-off" id="sub-off" data-i18n="sub_off" hidden>Calendari de prova: els botons funcionaran quan el connectem amb el calendari de la filà.</p>
+      <p class="sub-msg" id="sub-msg" role="status" aria-live="polite"></p>
+      <details class="how">
+        <summary data-i18n="how_h">Com s'afig?</summary>
+        <ul>
+          <li><b>iPhone.</b> <span data-i18n="how_ios">Toca «iPhone» i accepta la subscripció.</span></li>
+          <li><b>Android.</b> <span data-i18n="how_and">Toca «Android»: s'obrirà Google Calendar; toca «Afegir».</span> <span data-i18n="how_and2">Si no et surt en l'aplicació: Configuració, toca «Filà Llana» i activa «Sincronitzar».</span></li>
+          <li><b data-i18n="how_other_t">Altres aplicacions</b>. <span data-i18n="how_other">Copia l'enllaç i afig-lo com a calendari per URL (per exemple, en Outlook).</span></li>
+        </ul>
+      </details>
     </div>
-    <div id="cal-list"></div>
+
+    <div class="cal-layout">
+      <aside class="mini" aria-labelledby="mini-title">
+        <div class="mini-head">
+          <button type="button" class="mini-nav" id="mini-prev" data-i18n-aria="prev_m" aria-label="Mes anterior"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12l4.58-4.59Z"/></svg></button>
+          <h3 id="mini-title" aria-live="polite"></h3>
+          <button type="button" class="mini-nav" id="mini-next" data-i18n-aria="next_m" aria-label="Mes següent"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8.59 16.59 10 18l6-6-6-6-1.41 1.41L13.17 12l-4.58 4.59Z"/></svg></button>
+        </div>
+        <div class="mini-grid" id="mini-grid"></div>
+        <ul class="legend">
+          <li><i class="dot f"></i><span data-i18n="leg_fila">Actes de la filà</span></li>
+          <li><i class="dot o"></i><span data-i18n="leg_of">Actes oficials (Junta de Festes)</span></li>
+        </ul>
+      </aside>
+      <div class="cal-list" id="cal-list"></div>
+    </div>
   </div>
 </section>
 
-<section class="block on-dark" id="galeria" aria-labelledby="h-gal">
+<section class="block on-dark fill" data-page="galeria" aria-labelledby="h-gal">
   <div class="wrap">
-    <h2 id="h-gal" data-i18n="gal_h">Galeria</h2>
+    <h2 id="h-gal" data-i18n="gal_h" tabindex="-1">Galeria</h2>
     <p class="lead" data-i18n="gal_lead">Fotos de la filà durant l'any i en festes.</p>
     <p class="demo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg><span data-i18n="gal_demo">De moment hi ha detalls de l'escut: ací aniran les fotos de la filà.</span></p>
     <div class="grid" id="grid"></div>
@@ -312,18 +402,18 @@ footer .f-brand{display:flex;align-items:center;gap:12px}
   </dialog>
 </section>
 
-<section class="block" id="inscripcions" aria-labelledby="h-form">
+<section class="block fill" data-page="inscripcions" aria-labelledby="h-form">
   <div class="wrap form-wrap">
-    <h2 id="h-form" data-i18n="form_h">Inscripcions</h2>
+    <h2 id="h-form" data-i18n="form_h" tabindex="-1">Inscripcions</h2>
     <p class="lead" data-i18n="form_lead">Alta, boato, convidats o propostes de millora: tot des d'ací.</p>
     <p class="demo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M11 7h2v2h-2V7Zm0 4h2v6h-2v-6Zm1-9a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg><span data-i18n="form_demo">Mode de prova: el formulari funciona, però no s'envia ni es guarda res. No hi poses dades reals.</span></p>
     <div id="form" aria-live="polite"></div>
   </div>
 </section>
 
-<section class="block contact" id="contacte" aria-labelledby="h-contact">
+<section class="block contact fill" data-page="contacte" aria-labelledby="h-contact">
   <div class="wrap">
-    <h2 id="h-contact" data-i18n="contact_h">Contacte</h2>
+    <h2 id="h-contact" data-i18n="contact_h" tabindex="-1">Contacte</h2>
     <div class="contact-grid">
       <div><h3 data-i18n="c_mail">Correu</h3><p><span class="ph" data-i18n="c_mail_ph">[correu de la filà]</span></p></div>
       <div><h3 data-i18n="c_social">Xarxes</h3><p><span class="ph" data-i18n="c_social_ph">[Instagram de la filà]</span></p></div>
@@ -346,14 +436,25 @@ footer .f-brand{display:flex;align-items:center;gap:12px}
 
 /* ═══ Textos ═══ */
 var T={
- va:{skip:"Salta al contingut",nav_cal:"Calendari",nav_gal:"Galeria",nav_form:"Inscripcions",nav_contact:"Contacte",menu:"Menú",
+ va:{skip:"Salta al contingut",nav_home:"Inici",nav_cal:"Calendari",nav_gal:"Galeria",nav_form:"Inscripcions",nav_contact:"Contacte",menu:"Menú",
   shield_alt:"Escut de la Filà Llana",tagline:"Moros i Cristians de Muro d'Alcoi",next_lbl:"Pròxim acte",next_btn:"Veure tot el calendari",
   about_h:"La filà",
   about_p1:"La Filà Llana és una colla de festers i festeres de Muro que viu els Moros i Cristians tot l'any: els assajos, els sopars, l'entrada i tot el que porta la festa.",
   about_p2:"En aquesta web trobaràs el calendari d'actes, les fotos de la filà i els formularis per a donar-te d'alta, apuntar-te al boato o portar convidats.",
-  j1_t:"Vull apuntar-me",j1_s:"Alta, boato, convidats o propostes",j2_t:"Quan són els actes?",j2_s:"Descarrega el calendari al mòbil",j3_t:"Veure les fotos",j3_s:"La filà en la festa",
-  cal_h:"Calendari",cal_lead:"Tots els actes de la filà. Descarrega'ls i et sortiran al calendari del mòbil.",cal_demo:"Calendari de prova: les dates són d'exemple.",
-  cal_dl:"Descarrega el calendari",cal_add:"Afegir",cal_add_long:"Afegir al meu calendari",allday:"Tot el dia",
+  j1_t:"Vull apuntar-me",j1_s:"Alta, boato, convidats o propostes",j2_t:"Quan són els actes?",j2_s:"Afig el calendari al mòbil",j3_t:"Veure les fotos",j3_s:"La filà en la festa",
+  cal_h:"Calendari",cal_lead:"Els actes de la filà i els oficials de la Junta de Festes, tots en un calendari.",cal_demo:"Calendari de prova: les dates són d'exemple.",
+  allday:"Tot el dia",
+  sub_h:"Tin el calendari al mòbil",sub_p:"Subscriu-te una sola vegada: et sortiran tots els actes i, si en canviem algun, es canviarà sol.",
+  sub_copy:"Copia l'enllaç",sub_off:"Calendari de prova: els botons funcionaran quan el connectem amb el calendari de la filà.",
+  copied:"Enllaç copiat. Afig-lo a la teua aplicació de calendari com a calendari per URL.",copy_manual:"Copia aquest enllaç:",
+  how_h:"Com s'afig?",how_ios:"Toca «iPhone» i accepta la subscripció. Ja està.",
+  how_and:"Toca «Android»: s'obrirà Google Calendar; toca «Afegir». Si des del mòbil no et deixa, fes-ho una vegada des d'un ordinador amb el mateix compte de Google i et sortirà també al mòbil.",
+  how_and2:"Si no et surt en l'aplicació: Configuració, toca «Filà Llana» i activa «Sincronitzar».",
+  how_other_t:"Altres aplicacions",how_other:"Copia l'enllaç i afig-lo com a calendari per URL (per exemple, en Outlook).",
+  leg_fila:"Actes de la filà",leg_of:"Actes oficials (Junta de Festes)",chip_of:"Oficial · Junta de Festes",
+  cal_loading:"Carregant els actes…",cal_empty:"De moment no hi ha cap acte previst.",
+  cal_err:"Ara mateix no podem mostrar els actes ací.",cal_err_link:"Mira'ls en Google Calendar",
+  prev_m:"Mes anterior",next_m:"Mes següent",act1:"acte",actN:"actes",untitled:"Acte",
   gal_h:"Galeria",gal_lead:"Fotos de la filà durant l'any i en festes.",gal_demo:"De moment hi ha detalls de l'escut: ací aniran les fotos de la filà.",
   photo:"Foto",of:"de",close:"Tanca",prev:"Anterior",next:"Següent",open_photo:"Obri la foto",
   form_h:"Inscripcions",form_lead:"Alta, boato, convidats o propostes de millora: tot des d'ací.",
@@ -365,14 +466,25 @@ var T={
   f_done:"Moltes gràcies! Hem rebut la teua resposta.",f_demo_done:"Mode de prova: no s'ha enviat res.",f_sum:"Això és el que rebria la junta:",f_again:"Envia una altra resposta",
   f_step:"Pas",f_confirm_clear:"Vols esborrar totes les respostes?"
  },
- es:{skip:"Saltar al contenido",nav_cal:"Calendario",nav_gal:"Galería",nav_form:"Inscripciones",nav_contact:"Contacto",menu:"Menú",
+ es:{skip:"Saltar al contenido",nav_home:"Inicio",nav_cal:"Calendario",nav_gal:"Galería",nav_form:"Inscripciones",nav_contact:"Contacto",menu:"Menú",
   shield_alt:"Escudo de la Filà Llana",tagline:"Moros y Cristianos de Muro de Alcoy",next_lbl:"Próximo acto",next_btn:"Ver todo el calendario",
   about_h:"La filà",
   about_p1:"La Filà Llana es un grupo de festeros y festeras de Muro que vive los Moros y Cristianos todo el año: los ensayos, las cenas, la entrada y todo lo que trae la fiesta.",
   about_p2:"En esta web encontrarás el calendario de actos, las fotos de la filà y los formularios para darte de alta, apuntarte al boato o traer invitados.",
-  j1_t:"Quiero apuntarme",j1_s:"Alta, boato, invitados o propuestas",j2_t:"¿Cuándo son los actos?",j2_s:"Descarga el calendario en el móvil",j3_t:"Ver las fotos",j3_s:"La filà en la fiesta",
-  cal_h:"Calendario",cal_lead:"Todos los actos de la filà. Descárgalos y te saldrán en el calendario del móvil.",cal_demo:"Calendario de prueba: las fechas son de ejemplo.",
-  cal_dl:"Descargar el calendario",cal_add:"Añadir",cal_add_long:"Añadir a mi calendario",allday:"Todo el día",
+  j1_t:"Quiero apuntarme",j1_s:"Alta, boato, invitados o propuestas",j2_t:"¿Cuándo son los actos?",j2_s:"Añade el calendario al móvil",j3_t:"Ver las fotos",j3_s:"La filà en la fiesta",
+  cal_h:"Calendario",cal_lead:"Los actos de la filà y los oficiales de la Junta de Fiestas, todos en un calendario.",cal_demo:"Calendario de prueba: las fechas son de ejemplo.",
+  allday:"Todo el día",
+  sub_h:"Ten el calendario en el móvil",sub_p:"Suscríbete una sola vez: te saldrán todos los actos y, si cambiamos alguno, se cambiará solo.",
+  sub_copy:"Copiar el enlace",sub_off:"Calendario de prueba: los botones funcionarán cuando lo conectemos con el calendario de la filà.",
+  copied:"Enlace copiado. Añádelo en tu aplicación de calendario como calendario por URL.",copy_manual:"Copia este enlace:",
+  how_h:"¿Cómo se añade?",how_ios:"Toca «iPhone» y acepta la suscripción. Ya está.",
+  how_and:"Toca «Android»: se abrirá Google Calendar; toca «Añadir». Si desde el móvil no te deja, hazlo una vez desde un ordenador con la misma cuenta de Google y te saldrá también en el móvil.",
+  how_and2:"Si no te sale en la aplicación: Ajustes, toca «Filà Llana» y activa «Sincronizar».",
+  how_other_t:"Otras aplicaciones",how_other:"Copia el enlace y añádelo como calendario por URL (por ejemplo, en Outlook).",
+  leg_fila:"Actos de la filà",leg_of:"Actos oficiales (Junta de Fiestas)",chip_of:"Oficial · Junta de Fiestas",
+  cal_loading:"Cargando los actos…",cal_empty:"De momento no hay ningún acto previsto.",
+  cal_err:"Ahora mismo no podemos mostrar los actos aquí.",cal_err_link:"Míralos en Google Calendar",
+  prev_m:"Mes anterior",next_m:"Mes siguiente",act1:"acto",actN:"actos",untitled:"Acto",
   gal_h:"Galería",gal_lead:"Fotos de la filà durante el año y en fiestas.",gal_demo:"De momento hay detalles del escudo: aquí irán las fotos de la filà.",
   photo:"Foto",of:"de",close:"Cerrar",prev:"Anterior",next:"Siguiente",open_photo:"Abrir la foto",
   form_h:"Inscripciones",form_lead:"Alta, boato, invitados o propuestas de mejora: todo desde aquí.",
@@ -392,96 +504,237 @@ function L(x){return (x&&typeof x==="object")?(x[lang]||x.va):x;}
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 var LOCALE=function(){return lang==="va"?"ca-ES":"es-ES";};
 
-/* ═══ Calendari (dates d'exemple) ═══ */
-var EVENTS=[
- {id:"sopar-germanor",d:"2026-11-14",t:"21:30",dur:180,title:{va:"Sopar de germanor",es:"Cena de hermandad"},place:{va:"Local de la filà",es:"Local de la filà"}},
- {id:"assemblea",d:"2026-11-28",t:"18:00",dur:120,title:{va:"Assemblea general",es:"Asamblea general"},place:{va:"Local de la filà",es:"Local de la filà"}},
- {id:"dinar-nadal",d:"2026-12-19",t:"14:00",dur:180,title:{va:"Dinar de Nadal",es:"Comida de Navidad"},place:{va:"Lloc per concretar",es:"Lugar por concretar"}},
- {id:"carrecs",d:"2027-01-23",t:"20:00",dur:150,title:{va:"Presentació de càrrecs",es:"Presentación de cargos"},place:{va:"Local de la filà",es:"Local de la filà"}},
- {id:"assaig-boato",d:"2027-02-20",t:"17:00",dur:120,title:{va:"Assaig de boato",es:"Ensayo de boato"},place:{va:"Local de la filà",es:"Local de la filà"}},
- {id:"prova-vestits",d:"2027-03-20",t:"11:00",dur:120,title:{va:"Prova de vestits",es:"Prueba de trajes"},place:{va:"Local de la filà",es:"Local de la filà"}},
- {id:"sopar-festes",d:"2027-04-24",t:"21:00",dur:180,title:{va:"Sopar abans de festes",es:"Cena antes de fiestas"},place:{va:"Lloc per concretar",es:"Lugar por concretar"}},
- {id:"festes",d:"2027-05-13",end:"2027-05-16",allday:true,title:{va:"Festes de Moros i Cristians",es:"Fiestas de Moros y Cristianos"},place:{va:"Muro d'Alcoi",es:"Muro de Alcoy"}}
-];
-function dt(ev){var p=ev.d.split("-").map(Number),h=[0,0];if(ev.t)h=ev.t.split(":").map(Number);return new Date(p[0],p[1]-1,p[2],h[0],h[1]);}
-function endOf(ev){if(ev.allday){var p=(ev.end||ev.d).split("-").map(Number);return new Date(p[0],p[1]-1,p[2],23,59);}return new Date(dt(ev).getTime()+ev.dur*60000);}
-function fmt(d,o){return new Intl.DateTimeFormat(LOCALE(),o).format(d);}
-function whenText(ev){
-  var d=dt(ev);
-  if(ev.allday){
-    var e=endOf(ev),txt=fmt(d,{day:"numeric",month:"long"});
-    if(ev.end&&ev.end!==ev.d) txt+=(lang==="va"?" al ":" al ")+fmt(e,{day:"numeric",month:"long"});
-    return txt+", "+L(ev.place);
+/* ═══ Calendari ═══
+   Llig el calendari «Filà Llana» de Google Calendar (compte filallanamuro@gmail.com).
+   Els actes que comencen per «Oficial ·» són de la Junta de Festes: ixen en daurat i sense la paraula davant.
+   Mentre CAL.id estiga buit, la web ensenya un calendari de prova. */
+var CAL={
+  id:"",   // ID del calendari: Configuració del calendari > Integra el calendari > ID del calendari
+  key:""   // Clau de l'API de Google Calendar, restringida a albertosil8.github.io
+};
+var OFICIAL_RE=/^\s*\[?\s*oficial\s*\]?(?![a-zà-ÿ])\s*[·:\-–—|•.]?\s*/i;
+
+var MON={va:["gener","febrer","març","abril","maig","juny","juliol","agost","setembre","octubre","novembre","desembre"],
+         es:["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"]};
+var MON3={va:["GEN","FEB","MAR","ABR","MAI","JUN","JUL","AGO","SET","OCT","NOV","DES"],es:["ENE","FEB","MAR","ABR","MAY","JUN","JUL","AGO","SEP","OCT","NOV","DIC"]};
+var WDL={va:["diumenge","dilluns","dimarts","dimecres","dijous","divendres","dissabte"],es:["domingo","lunes","martes","miércoles","jueves","viernes","sábado"]};
+var WDS={va:["Dg.","Dl.","Dt.","Dc.","Dj.","Dv.","Ds."],es:["Dom.","Lun.","Mar.","Mié.","Jue.","Vie.","Sáb."]};
+var WDM={va:["Dl","Dt","Dc","Dj","Dv","Ds","Dg"],es:["L","M","X","J","V","S","D"]};
+
+function p3(s){return s.split("-").map(Number);}
+function iso(y,m,d){return new Date(Date.UTC(y,m-1,d)).toISOString().slice(0,10);}
+function plusDays(s,n){var p=p3(s);return iso(p[0],p[1],p[2]+n);}
+function plusMonths(ym,n){var p=p3(ym+"-01");return iso(p[0],p[1]+n,1).slice(0,7);}
+function dow(s){var p=p3(s);return new Date(Date.UTC(p[0],p[1]-1,p[2])).getUTCDay();}
+function madridToday(){
+  try{
+    var o={};
+    new Intl.DateTimeFormat("en-GB",{timeZone:"Europe/Madrid",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date()).forEach(function(x){o[x.type]=x.value;});
+    if(o.year&&o.month&&o.day) return o.year+"-"+o.month+"-"+o.day;
+  }catch(e){}
+  var d=new Date();return iso(d.getFullYear(),d.getMonth()+1,d.getDate());
+}
+var TODAY=madridToday();
+function cap(s){return s?s.charAt(0).toUpperCase()+s.slice(1):s;}
+function mName(m){return MON[lang][m-1];}
+function deM(m){var n=mName(m);return (lang==="va"&&/^[aeiou]/.test(n))?"d'"+n:"de "+n;}
+function monthTitle(ym){var p=p3(ym+"-01");return cap(mName(p[1]))+" de "+p[0];}
+function longDay(s){var p=p3(s);return WDL[lang][dow(s)]+" "+p[2]+" "+deM(p[1]);}
+function rangeText(ev){
+  var a=p3(ev.d),b=p3(ev.e);
+  return "Del "+a[2]+(a[1]===b[1]?"":" "+deM(a[1]))+" al "+b[2]+" "+deM(b[1]);
+}
+function evPast(ev){return ev.allday?ev.e<TODAY:(ev.endMs||0)<Date.now();}
+function evTitle(ev){return ev.title?L(ev.title):t("untitled");}
+
+/* Calendari de prova (mentre no estiga connectat) */
+function demoEvents(){
+  var D=[
+   ["2026-11-14","21:30",180,0,{va:"Sopar de germanor",es:"Cena de hermandad"},{va:"Local de la filà",es:"Local de la filà"}],
+   ["2026-11-21","20:00",90,1,{va:"Presentació del cartell de festes",es:"Presentación del cartel de fiestas"},{va:"Lloc per concretar",es:"Lugar por concretar"}],
+   ["2026-11-28","18:00",120,0,{va:"Assemblea general",es:"Asamblea general"},{va:"Local de la filà",es:"Local de la filà"}],
+   ["2026-12-19","14:00",180,0,{va:"Dinar de Nadal",es:"Comida de Navidad"},{va:"Lloc per concretar",es:"Lugar por concretar"}],
+   ["2027-01-23","20:00",150,1,{va:"Presentació de càrrecs festers",es:"Presentación de cargos festeros"},{va:"Lloc per concretar",es:"Lugar por concretar"}],
+   ["2027-02-20","17:00",120,0,{va:"Assaig de boato",es:"Ensayo de boato"},{va:"Local de la filà",es:"Local de la filà"}],
+   ["2027-03-20","11:00",120,0,{va:"Prova de vestits",es:"Prueba de trajes"},{va:"Local de la filà",es:"Local de la filà"}],
+   ["2027-04-24","21:00",180,0,{va:"Sopar abans de festes",es:"Cena antes de fiestas"},{va:"Lloc per concretar",es:"Lugar por concretar"}],
+   ["2027-05-13","",0,1,{va:"Festes de Moros i Cristians",es:"Fiestas de Moros y Cristianos"},{va:"Muro d'Alcoi",es:"Muro de Alcoy"},"2027-05-16"]
+  ];
+  return D.map(function(r,i){
+    var ev={id:"prova-"+i,d:r[0],t:r[1],oficial:!!r[3],title:r[4],place:r[5],desc:""};
+    if(!r[1]){ev.allday=true;ev.e=r[6]||r[0];}
+    else{ev.e=r[0];ev.startMs=Date.parse(r[0]+"T"+r[1]+":00+01:00");ev.endMs=ev.startMs+r[2]*60000;}
+    return ev;
+  });
+}
+
+/* Actes de Google Calendar */
+function plainText(h){
+  if(!h) return "";
+  var s=String(h).replace(/<br\s*\/?>/gi,"\n").replace(/<\/(p|div|li|h\d)>/gi,"\n");
+  try{s=new DOMParser().parseFromString(s,"text/html").body.textContent||"";}catch(e){s=s.replace(/<[^>]*>/g,"");}
+  return s.replace(/\r/g,"").replace(/[ \t]+\n/g,"\n").replace(/\n{3,}/g,"\n\n").trim();
+}
+function fromGoogle(it,i){
+  var raw=String(it.summary||"").trim(),of=OFICIAL_RE.test(raw),title=raw.replace(OFICIAL_RE,"").trim();
+  var s=it.start||{},e=it.end||{};
+  var ev={id:String(it.id||i),title:title||null,place:String(it.location||"").trim(),desc:plainText(it.description),oficial:of};
+  if(s.date){
+    ev.allday=true;ev.d=s.date;ev.e=e.date?plusDays(e.date,-1):s.date;if(ev.e<ev.d)ev.e=ev.d;
+  }else{
+    var sd=String(s.dateTime||""),ed=String(e.dateTime||sd);
+    ev.d=sd.slice(0,10);ev.t=sd.slice(11,16);ev.startMs=Date.parse(sd);ev.endMs=Date.parse(ed);
+    var endDay=ed.slice(0,10);if(ed.slice(11,16)==="00:00")endDay=plusDays(endDay,-1);
+    ev.e=(endDay>ev.d&&ev.endMs-ev.startMs>=20*3600000)?endDay:ev.d;
   }
-  return fmt(d,{weekday:"long",day:"numeric",month:"long"})+", "+ev.t+". "+L(ev.place);
+  return ev;
+}
+var CS={mode:"loading",events:[]};
+function loadCalendar(){
+  if(!CAL.id){CS={mode:"demo",events:demoEvents()};afterLoad();return;}
+  if(!CAL.key){CS={mode:"nokey",events:[]};afterLoad();return;}
+  CS={mode:"loading",events:[]};afterLoad();
+  var first=TODAY.slice(0,7)+"-01",p=p3(first);
+  var tmin=new Date(Date.UTC(p[0],p[1]-1,1)-86400000).toISOString(),tmax=new Date(Date.UTC(p[0],p[1]-1+13,1)).toISOString();
+  var url="https://www.googleapis.com/calendar/v3/calendars/"+encodeURIComponent(CAL.id)+"/events"+
+    "?key="+encodeURIComponent(CAL.key)+"&singleEvents=true&orderBy=startTime&maxResults=250&timeZone=Europe%2FMadrid"+
+    "&timeMin="+encodeURIComponent(tmin)+"&timeMax="+encodeURIComponent(tmax)+
+    "&fields="+encodeURIComponent("items(id,status,summary,description,location,start,end)");
+  fetch(url).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json();}).then(function(j){
+    var evs=(j.items||[]).filter(function(it){return it.status!=="cancelled"&&it.start;}).map(fromGoogle).filter(function(ev){return ev.d&&ev.e>=first;});
+    evs.sort(function(a,b){return (a.d+(a.t||"")).localeCompare(b.d+(b.t||""));});
+    CS={mode:"live",events:evs};afterLoad();
+  }).catch(function(){CS={mode:"error",events:[]};afterLoad();});
+}
+function afterLoad(){renderCalendar();renderNext();}
+
+/* Pintar: mes, llista i pròxim acte */
+var MAP={},VIEW=null,SEL=null;
+var miniGrid=document.getElementById("mini-grid"),miniTitle=document.getElementById("mini-title"),miniPrev=document.getElementById("mini-prev"),miniNext=document.getElementById("mini-next");
+function dayMap(){
+  var m={};
+  CS.events.forEach(function(ev,i){
+    var d=ev.d,n=0;
+    while(d<=ev.e&&n<62){
+      if(!m[d])m[d]={f:0,o:0,i:[]};
+      m[d][ev.oficial?"o":"f"]++;m[d].i.push(i);
+      d=plusDays(d,1);n++;
+    }
+  });
+  return m;
+}
+function monthBounds(){
+  var min=TODAY.slice(0,7),max=min;
+  CS.events.forEach(function(ev){var m=ev.e.slice(0,7);if(m>max)max=m;});
+  return [min,max];
+}
+function renderMini(){
+  var b=monthBounds();
+  if(!VIEW||VIEW<b[0])VIEW=b[0];
+  if(VIEW>b[1])VIEW=b[1];
+  var first=VIEW+"-01",p=p3(first),lead=(dow(first)+6)%7,dim=new Date(Date.UTC(p[0],p[1],0)).getUTCDate(),html="";
+  WDM[lang].forEach(function(w){html+='<span class="wd" aria-hidden="true">'+w+'</span>';});
+  for(var k=0;k<lead;k++) html+='<span class="d" aria-hidden="true"></span>';
+  for(var d=1;d<=dim;d++){
+    var day=iso(p[0],p[1],d),info=MAP[day];
+    var cls="d"+(day===TODAY?" today":"")+(day<TODAY?" past":"")+(day===SEL?" sel":"");
+    var cur=day===TODAY?' aria-current="date"':'';
+    if(info){
+      var n=info.f+info.o,lbl=cap(longDay(day))+": "+n+" "+(n===1?t("act1"):t("actN"));
+      html+='<button type="button" class="'+cls+'" data-day="'+day+'" aria-label="'+esc(lbl)+'"'+cur+'>'+d+
+        '<span class="dots" aria-hidden="true">'+(info.f?'<i class="dot f"></i>':'')+(info.o?'<i class="dot o"></i>':'')+'</span></button>';
+    }else{
+      html+='<span class="'+cls+'"'+cur+'>'+d+'</span>';
+    }
+  }
+  miniGrid.innerHTML=html;
+  miniTitle.textContent=monthTitle(VIEW);
+  miniPrev.disabled=VIEW<=b[0];
+  miniNext.disabled=VIEW>=b[1];
+}
+function embedUrl(){return "https://calendar.google.com/calendar/embed?src="+encodeURIComponent(CAL.id)+"&ctz=Europe%2FMadrid";}
+function renderList(){
+  var box=document.getElementById("cal-list");
+  if(CS.mode==="loading"){box.innerHTML='<p class="cal-note">'+esc(t("cal_loading"))+'</p>';return;}
+  if(CS.mode==="nokey"||CS.mode==="error"){
+    box.innerHTML='<p class="cal-note">'+esc(t("cal_err"))+' <a href="'+esc(embedUrl())+'" target="_blank" rel="noopener">'+esc(t("cal_err_link"))+'</a></p>';return;
+  }
+  if(!CS.events.length){box.innerHTML='<p class="cal-note">'+esc(t("cal_empty"))+'</p>';return;}
+  var html="",cur="";
+  CS.events.forEach(function(ev,i){
+    var ym=ev.d.slice(0,7);
+    if(ym!==cur){
+      if(cur) html+="</ul>";
+      cur=ym;html+='<h3 class="month">'+esc(monthTitle(ym))+'</h3><ul class="events">';
+    }
+    var a=p3(ev.d),b=p3(ev.e),multi=ev.e!==ev.d;
+    var when=ev.allday?(multi?rangeText(ev):t("allday")):(ev.t+(multi?" · "+rangeText(ev):""));
+    var place=L(ev.place)||"",desc=L(ev.desc)||"";
+    var meta=esc(when)+(place?' · <a href="https://www.google.com/maps/search/?api=1&amp;query='+encodeURIComponent(place)+'" target="_blank" rel="noopener">'+esc(place)+'</a>':'');
+    html+='<li class="ev '+(ev.oficial?'o':'f')+(evPast(ev)?' past':'')+'" id="ev-'+i+'">'+
+      '<div class="ev-date"><b'+(multi?' class="range"':'')+'>'+a[2]+(multi?'–'+b[2]:'')+'</b><span>'+esc(WDS[lang][dow(ev.d)])+'</span></div>'+
+      '<div>'+(ev.oficial?'<span class="chip">'+esc(t("chip_of"))+'</span>':'')+
+      '<h4>'+esc(evTitle(ev))+'</h4><p class="meta">'+meta+'</p>'+(desc?'<p class="desc">'+esc(desc)+'</p>':'')+'</div></li>';
+  });
+  html+="</ul>";
+  box.innerHTML=html;
 }
 function renderCalendar(){
-  var now=new Date(),html="",cur="";
-  EVENTS.forEach(function(ev){
-    var d=dt(ev),key=d.getFullYear()+"-"+d.getMonth();
-    if(key!==cur){
-      if(cur) html+="</ul>";
-      cur=key;
-      var mt=fmt(d,{month:"long",year:"numeric"});html+='<h3 class="month">'+esc(mt.charAt(0).toUpperCase()+mt.slice(1))+'</h3><ul class="events">';
-    }
-    var past=endOf(ev)<now;
-    var day=ev.allday&&ev.end?d.getDate()+"–"+endOf(ev).getDate():d.getDate();
-    var sub=ev.allday?t("allday")+", "+L(ev.place):ev.t+", "+L(ev.place);
-    html+='<li class="ev'+(past?' past':'')+'"><div class="ev-date"><b'+(ev.allday&&ev.end?' class="range"':'')+'>'+day+'</b><span>'+esc(fmt(d,{weekday:"short"}))+'</span></div>'+
-      '<div><h3>'+esc(L(ev.title))+'</h3><p>'+esc(sub)+'</p></div>'+
-      '<button type="button" class="btn btn-line" data-ics="'+ev.id+'" aria-label="'+esc(t("cal_add_long")+": "+L(ev.title))+'">'+
-      '<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 16H5V9h14v11Zm-8-9h2v3h3v2h-3v3h-2v-3H8v-2h3v-3Z"/></svg>'+esc(t("cal_add"))+'</button></li>';
-  });
-  if(cur) html+="</ul>";
-  document.getElementById("cal-list").innerHTML=html;
+  document.getElementById("cal-demo").hidden=CS.mode!=="demo";
+  MAP=dayMap();
+  renderMini();
+  renderList();
+}
+function renderNext(){
+  var box=document.getElementById("next"),nx=null;
+  CS.events.some(function(ev){if(!evPast(ev)){nx=ev;return true;}return false;});
+  if(!nx){box.hidden=true;return;}
+  var p=p3(nx.d),w=nx.e!==nx.d?rangeText(nx):cap(longDay(nx.d));
+  if(nx.t) w+=", "+nx.t;
+  if(L(nx.place)) w+=". "+L(nx.place);
+  document.getElementById("next-day").innerHTML=p[2]+"<small>"+MON3[lang][p[1]-1]+"</small>";
+  document.getElementById("next-title").textContent=evTitle(nx);
+  document.getElementById("next-when").textContent=w;
+  box.hidden=false;
+}
+miniPrev.addEventListener("click",function(){VIEW=plusMonths(VIEW,-1);renderMini();});
+miniNext.addEventListener("click",function(){VIEW=plusMonths(VIEW,1);renderMini();});
+miniGrid.addEventListener("click",function(e){
+  var b=e.target.closest("button[data-day]");if(!b)return;
+  var day=b.getAttribute("data-day"),info=MAP[day];if(!info)return;
+  SEL=day;renderMini();
+  var li=document.getElementById("ev-"+info.i[0]);if(!li)return;
+  var calm=window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  li.scrollIntoView({behavior:calm?"auto":"smooth",block:"center"});
+  Array.prototype.forEach.call(document.querySelectorAll(".ev.flash"),function(x){x.classList.remove("flash");});
+  info.i.forEach(function(k){var el=document.getElementById("ev-"+k);if(el)el.classList.add("flash");});
+  clearTimeout(miniGrid._t);miniGrid._t=setTimeout(function(){Array.prototype.forEach.call(document.querySelectorAll(".ev.flash"),function(x){x.classList.remove("flash");});},2200);
+});
 
-  var next=null;EVENTS.forEach(function(ev){if(!next&&endOf(ev)>=now)next=ev;});
-  var box=document.getElementById("next");
-  if(next){
-    var d=dt(next);
-    document.getElementById("next-day").innerHTML=d.getDate()+"<small>"+esc(fmt(d,{month:"short"}).replace(".","").toUpperCase())+"</small>";
-    document.getElementById("next-title").textContent=L(next.title);
-    document.getElementById("next-when").textContent=whenText(next);
-    box.hidden=false;
-  }else box.hidden=true;
-}
-
-/* .ics */
-function pad(n){return (n<10?"0":"")+n;}
-function icsLocal(d){return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+"T"+pad(d.getHours())+pad(d.getMinutes())+"00";}
-function icsDate(s){return s.replace(/-/g,"");}
-function icsEsc(s){return String(s).replace(/\\/g,"\\\\").replace(/;/g,"\\;").replace(/,/g,"\\,").replace(/\n/g,"\\n");}
-function fold(line){var out="",s=line;while(s.length>70){out+=s.slice(0,70)+"\r\n ";s=s.slice(70);}return out+s;}
-function buildICS(list){
-  var stamp=new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,"");
-  var L1=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Fila Llana//Web//CA","CALSCALE:GREGORIAN","METHOD:PUBLISH","X-WR-CALNAME:Filà Llana","X-WR-TIMEZONE:Europe/Madrid",
-   "BEGIN:VTIMEZONE","TZID:Europe/Madrid",
-   "BEGIN:DAYLIGHT","TZOFFSETFROM:+0100","TZOFFSETTO:+0200","TZNAME:CEST","DTSTART:19700329T020000","RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU","END:DAYLIGHT",
-   "BEGIN:STANDARD","TZOFFSETFROM:+0200","TZOFFSETTO:+0100","TZNAME:CET","DTSTART:19701025T030000","RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU","END:STANDARD",
-   "END:VTIMEZONE"];
-  list.forEach(function(ev){
-    L1.push("BEGIN:VEVENT","UID:"+ev.id+"@fila-llana","DTSTAMP:"+stamp);
-    if(ev.allday){
-      var e=endOf(ev);e=new Date(e.getFullYear(),e.getMonth(),e.getDate()+1);
-      L1.push("DTSTART;VALUE=DATE:"+icsDate(ev.d),"DTEND;VALUE=DATE:"+e.getFullYear()+pad(e.getMonth()+1)+pad(e.getDate()));
-    }else{
-      L1.push("DTSTART;TZID=Europe/Madrid:"+icsLocal(dt(ev)),"DTEND;TZID=Europe/Madrid:"+icsLocal(endOf(ev)));
-    }
-    L1.push("SUMMARY:"+icsEsc(L(ev.title)+" (Filà Llana)"),"LOCATION:"+icsEsc(L(ev.place)),"END:VEVENT");
+/* Subscripció */
+var subIos=document.getElementById("sub-ios"),subAnd=document.getElementById("sub-and"),subCopy=document.getElementById("sub-copy"),subMsg=document.getElementById("sub-msg");
+function icsUrl(){return "https://calendar.google.com/calendar/ical/"+encodeURIComponent(CAL.id)+"/public/basic.ics";}
+function setupSub(){
+  var on=!!CAL.id;
+  subIos.href=on?icsUrl().replace(/^https:/,"webcal:"):"#";
+  subAnd.href=on?"https://calendar.google.com/calendar/u/0?cid="+btoa(CAL.id).replace(/=+$/,""):"#";
+  [subIos,subAnd,subCopy].forEach(function(b){
+    b.classList.toggle("off",!on);
+    if(on) b.removeAttribute("aria-disabled"); else b.setAttribute("aria-disabled","true");
   });
-  L1.push("END:VCALENDAR");
-  return L1.map(fold).join("\r\n")+"\r\n";
+  document.getElementById("sub-off").hidden=on;
+  var ua=navigator.userAgent||"";
+  var ios=/iPhone|iPad|iPod/.test(ua)||(/Macintosh/.test(ua)&&navigator.maxTouchPoints>1),android=/Android/i.test(ua);
+  var main=ios?subIos:(android?subAnd:null);
+  if(main){main.classList.remove("btn-line");main.classList.add("btn-red");main.parentNode.insertBefore(main,main.parentNode.firstChild);}
 }
-function download(name,text){
-  var blob=new Blob([text],{type:"text/calendar;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
-  a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();
-  setTimeout(function(){URL.revokeObjectURL(url);},4000);
-}
-document.getElementById("dl-all").addEventListener("click",function(){download("calendari-fila-llana.ics",buildICS(EVENTS));});
-document.getElementById("cal-list").addEventListener("click",function(e){
-  var b=e.target.closest("[data-ics]");if(!b)return;
-  var ev=EVENTS.filter(function(x){return x.id===b.getAttribute("data-ics");})[0];
-  if(ev) download(ev.id+".ics",buildICS([ev]));
+[subIos,subAnd].forEach(function(a){a.addEventListener("click",function(e){if(!CAL.id)e.preventDefault();});});
+subCopy.addEventListener("click",function(){
+  if(!CAL.id) return;
+  var u=icsUrl();
+  function manual(){subMsg.innerHTML=esc(t("copy_manual"))+' <code>'+esc(u)+'</code>';}
+  if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(u).then(function(){subMsg.textContent=t("copied");},manual);
+  else manual();
 });
 
 /* ═══ Galeria ═══ */
@@ -669,9 +922,33 @@ function applyLang(){
   Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-aria]"),function(el){el.setAttribute("aria-label",t(el.getAttribute("data-i18n-aria")));});
   Array.prototype.forEach.call(document.querySelectorAll("[data-i18n-alt]"),function(el){el.alt=t(el.getAttribute("data-i18n-alt"));});
   Array.prototype.forEach.call(document.querySelectorAll(".lang button"),function(b){b.setAttribute("aria-pressed",String(b.getAttribute("data-lang")===lang));});
-  document.title=lang==="va"?"Filà Llana · Muro d'Alcoi":"Filà Llana · Muro de Alcoy";
-  renderCalendar();renderGallery();renderForm(false);
+  setTitle();
+  renderCalendar();renderNext();renderGallery();renderForm(false);
 }
+
+/* ═══ Pàgines ═══ */
+var PAGES=["inici","calendari","galeria","inscripcions","contacte"],NAVK={calendari:"nav_cal",galeria:"nav_gal",inscripcions:"nav_form",contacte:"nav_contact"},page=null;
+function setTitle(){
+  var base=lang==="va"?"Filà Llana · Muro d'Alcoi":"Filà Llana · Muro de Alcoy";
+  document.title=(page&&page!=="inici")?t(NAVK[page])+" · Filà Llana":base;
+}
+function route(first){
+  var h=(location.hash||"").replace(/^#\/?/,"");
+  if(PAGES.indexOf(h)<0){if(page&&h)return;h="inici";}
+  var changed=h!==page;page=h;
+  Array.prototype.forEach.call(document.querySelectorAll("[data-page]"),function(s){s.hidden=s.getAttribute("data-page")!==h;});
+  Array.prototype.forEach.call(document.querySelectorAll(".nav a"),function(a){
+    if(a.getAttribute("href")==="#"+h) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current");
+  });
+  setTitle();
+  if(lb.open&&h!=="galeria") lb.close();
+  if(changed&&!first){
+    try{window.scrollTo({top:0,left:0,behavior:"instant"});}catch(e){window.scrollTo(0,0);}
+    var hd=document.querySelector('[data-page="'+h+'"] h2[tabindex]');
+    if(hd) hd.focus({preventScroll:true});
+  }
+}
+window.addEventListener("hashchange",function(){route(false);});
 Array.prototype.forEach.call(document.querySelectorAll(".lang button"),function(b){
   b.addEventListener("click",function(){lang=b.getAttribute("data-lang");try{localStorage.setItem("fila-lang",lang);}catch(e){}applyLang();});
 });
@@ -683,7 +960,10 @@ nav.addEventListener("click",function(e){if(e.target.closest("a")){nav.classList
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&nav.classList.contains("open")){nav.classList.remove("open");menuBtn.setAttribute("aria-expanded","false");menuBtn.focus();}});
 
 document.getElementById("year").textContent=new Date().getFullYear();
+setupSub();
 applyLang();
+route(true);
+loadCalendar();
 })();
 </script>
 </body>
